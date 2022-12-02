@@ -1,0 +1,48 @@
+.flex-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.main-position{
+    position: relative;
+    top: 100px;
+    width: 100%;
+}
+.title{
+    padding: 10px 0;
+    font-weight: 700;
+    font-family: 'Comfortaa', cursive;
+}
+/* .title-text{
+    max-width: 50rem !important;
+} */
+.bg-container{
+    background-image: url("../../Logos/bg/veg\ pattern.jpg");
+    padding: 1rem;
+    
+}
+.description{
+    padding: 20px 0;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.6);
+    /* font-family: 'Jura', sans-serif; */
+    font-family: 'Noto Sans Mono', monospace;
+    max-width: 40rem !important;
+}
+.flex-column-css{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.logo-size{
+    width: 75px;
+    height: 75px;
+    object-fit: contain;
+}
+.app-desc{
+    margin-top: 5rem;
+}
+.desc-textarea{
+    max-width: 30rem;
+}

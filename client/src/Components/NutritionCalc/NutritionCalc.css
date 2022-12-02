@@ -1,0 +1,146 @@
+.nutritioncalculator{
+    margin-top: 1rem;
+    border-radius: 10px;
+    border: 1px solid black;
+    width: 100vh;
+}
+.calculator-textfield{
+    width: 20rem;
+    margin: 1.5rem 0;
+}
+.nutritioncalculator Button{
+    color: rgba(93,175,47,1);
+}
+.nutritioncalculator Button:hover{
+    color: rgb(57, 112, 25);
+}
+.gender-male{
+    color: darkblue;
+}
+.gender-female{
+    color: palevioletred;
+}
+.gender:hover{
+    transition: linear 0.5s;
+}
+.gender-f{
+    padding: 1rem 2.5rem;
+    margin: 1rem 2.5rem;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.gender-m{
+    padding: 1rem 2.5rem;
+    margin: 1rem 2.5rem;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.gender-m-clicked{
+    padding: 1rem 2.5rem;
+    margin: 1rem 2.5rem;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 139, 0.5);
+}
+.gender-f-clicked{
+    padding: 1rem 2.5rem;
+    margin: 1rem 2.5rem;
+    border-radius: 10px;
+    background-color: rgba(216, 112, 147, 0.5);
+}
+.gender-f:hover{
+    padding: 0.8rem 2.3rem;
+    border: 0.1rem solid palevioletred;
+    resize: both;
+    border-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E %3Cstyle%3Epath%7Banimation:stroke 2.5s infinite linear%3B%7D%40keyframes stroke%7Bto%7Bstroke-dashoffset:776%3B%7D%7D%3C/style%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='palevioletred' /%3E%3Cstop offset='25%25' stop-color='palevioletred' /%3E%3Cstop offset='50%25' stop-color='palevioletred' /%3E%3Cstop offset='100%25' stop-color='palevioletred' /%3E%3C/linearGradient%3E %3Cpath d='M1.5 1.5 l97 0l0 97l-97 0 l0 -97' stroke-linecap='square' stroke='url(%23g)' stroke-width='5' stroke-dasharray='388'/%3E %3C/svg%3E") 1;
+}
+.gender-m:hover{
+    padding: 0.8rem 2.3rem;
+    border: 0.1rem solid darkblue;
+    resize: both;
+    border-image: url("data:image/svg+xml;charset=utf-8,%3Csvg width='100' height='100' viewBox='0 0 100 100' fill='none' xmlns='http://www.w3.org/2000/svg'%3E %3Cstyle%3Epath%7Banimation:stroke 2.5s infinite linear%3B%7D%40keyframes stroke%7Bto%7Bstroke-dashoffset:776%3B%7D%7D%3C/style%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='0%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='darkblue' /%3E%3Cstop offset='25%25' stop-color='darkblue' /%3E%3Cstop offset='50%25' stop-color='darkblue' /%3E%3Cstop offset='100%25' stop-color='darkblue' /%3E%3C/linearGradient%3E %3Cpath d='M1.5 1.5 l97 0l0 97l-97 0 l0 -97' stroke-linecap='square' stroke='url(%23g)' stroke-width='5' stroke-dasharray='388'/%3E %3C/svg%3E") 1;
+}
+                /* Diets */
+.keto-diet{
+    border: 5px solid rgba(219,174,126,1);
+    border-radius: 40px;
+}
+.keto-diet:hover{
+    background-color: rgba(219,174,126,0.5);
+    cursor: pointer
+}
+
+.paleo-diet{
+    border: 5px solid rgba(216,45,48,1);
+    border-radius: 40px;
+}
+.paleo-diet:hover{
+    background-color: rgba(216,45,48,0.5);
+    cursor: pointer
+}
+
+.low-carb-diet{
+    border: 5px solid rgba(246,219,3,255);
+    border-radius: 40px;
+}
+.low-carb-diet:hover{
+    background-color: rgba(246,219,3,0.5);
+    cursor: pointer
+}
+
+.mediterranean-diet{
+    border: 5px solid rgba(179,200,57,255);
+    border-radius: 40px;
+}
+.mediterranean-diet:hover{
+    background-color: rgba(179,200,57,0.5);
+    cursor: pointer
+}
+
+.no-sugar-diet{
+    border: 5px solid rgba(69,186,240,255);
+    border-radius: 40px;
+}
+.no-sugar-diet:hover{
+    background-color: rgba(69,186,240,0.5);
+    cursor: pointer
+}
+
+.raw-diet{
+    border: 5px solid rgba(119,171,44,255);
+    border-radius: 40px;
+}
+.raw-diet:hover{
+    background-color: rgba(119,171,44,0.5);
+    cursor: pointer
+}
+
+.vegan-diet{
+    border: 5px solid rgba(150,194,49,255);
+    border-radius: 40px;
+}
+.vegan-diet:hover{
+    background-color: rgba(150,194,49,0.5);
+    cursor: pointer
+}
+
+.vegetarian-diet{
+    border: 5px solid rgba(119,170,37,255);
+    border-radius: 40px;
+}
+.vegetarian-diet:hover{
+    background-color: rgba(119,170,37,0.5);
+    cursor: pointer
+}
+
+.desc-diet{
+    font-family: Akaya Kanadaka, cursive;
+}
+
+.span-navigation{
+    cursor: pointer;
+    color: rgba(93,175,47,1)
+}
+.span-navigation-v2{
+    cursor: pointer;
+    color: rgb(176, 221, 129)
+}

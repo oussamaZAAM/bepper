@@ -1,0 +1,59 @@
+.bg-fix{
+    background-color: rgba(93,175,47,255) !important;
+    padding: 0;
+}
+.nav-grid{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.flex{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.signin-nav{
+    padding-inline: 30px !important;
+    font-weight: 700 !important;
+    color: rgba(93,175,47,255) !important;
+    background-color: white !important;
+    margin-inline: 2.5px !important;
+}
+.signin-nav:hover{
+  -webkit-text-fill-color: rgba(93,175,47,255);
+  -webkit-text-stroke-color: black;
+  -webkit-text-stroke-width: 1px;
+  border: 2.5px solid black;
+  margin-inline: 0 !important;
+}
+.bepper-text:hover{
+    /* color: rgba(93,175,47,255); */
+    /* text-shadow: 1px 1px black; */
+  -webkit-text-fill-color: rgba(93,175,47,255);
+  -webkit-text-stroke-color: black;
+  -webkit-text-stroke-width: 1px; 
+}
+.bepper-button:hover{
+  -webkit-text-fill-color: rgba(93,175,47,255);
+  -webkit-text-stroke-color: black;
+  -webkit-text-stroke-width: 0.5px; 
+}
+
+
+@media only screen and (min-width: 600px) {
+    .nav-grid{
+        justify-content: space-between;
+    }
+}
+@media only screen and (max-width: 490px) {
+    .signin-nav{
+        padding-inline: 15px !important;
+    }
+    .bepper-text{
+        padding-inline: 5px !important;
+    }
+    .nav-burgermenu{
+        padding-left: 0px !important;
+        margin-inline: 0px !important;
+    }
+}
