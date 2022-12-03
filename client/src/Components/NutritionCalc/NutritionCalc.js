@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./NutritionCalc.css"
 
-import { Button, createTheme, MenuItem, NativeSelect, Select, TextField } from '@mui/material'
+import { Button, createTheme, MenuItem, NativeSelect, Select, TextField, Tooltip } from '@mui/material'
 import { useTheme } from '@mui/material/styles';
 import MobileStepper from '@mui/material/MobileStepper';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
@@ -32,6 +32,8 @@ const NutritionCalc = () => {
         eatStyle: '',
     });
     const [nutritionState, setNutritionState] = useState([false, false, false, false]);
+    const [calories, setCalories] = useState();
+    const [isCalories, setIsCalories] = useState(false);
     const [body, setBody] = useState({
         height: 'cm',
         weight: 'kg'
@@ -47,9 +49,11 @@ const NutritionCalc = () => {
     setActiveStep((prevActiveStep) => prevActiveStep - 1);
     };
     const handleChangeBody = (e) => {
+        setIsCalories(false)
         setBody({...body, [e.target.name]: e.target.value})
     }
     const handleActivity = (e) => {
+        setIsCalories(false)
         setNutritionValue({...nutritionValue, activity: e})
         setNutritionState(prevArray => {
             const newArray = prevArray;
@@ -58,6 +62,7 @@ const NutritionCalc = () => {
         })
     }
     const handleWorkout = (e) => {
+        setIsCalories(false)
         setNutritionValue({...nutritionValue, workout: e})
         setNutritionState(prevArray => {
             const newArray = prevArray;
@@ -66,6 +71,7 @@ const NutritionCalc = () => {
         })
     }
     const handleEatStyle = (e) => {
+        setIsCalories(false)
         setNutritionValue({...nutritionValue, eatStyle: e})
         setNutritionState(prevArray => {
             const newArray = prevArray;
@@ -74,6 +80,7 @@ const NutritionCalc = () => {
         })
     }
     const handleChange = (e, gender) => {
+        setIsCalories(false)
         if (gender) {
             setNutritionValue({...nutritionValue, gender: gender});
             setNutritionState(prevArray => {
@@ -133,6 +140,37 @@ const NutritionCalc = () => {
         }
     }
 
+    const generateCalories = () => {
+        setIsCalories(true)
+        if (nutritionValue.gender === 'male') {
+            const cals = 10*nutritionValue.weight + 6.25*nutritionValue.height - 5*nutritionValue.age + 5;
+            switch (nutritionValue.activity) {
+                case 'low':
+                    setCalories(cals * 1.375);
+                    break
+                case 'medium':
+                    setCalories(cals * 1.55);
+                    break
+                case 'high':
+                    setCalories(cals * 1.725);
+                    break
+            }
+        } else {
+            const cals = 10*nutritionValue.weight + 6.25*nutritionValue.height - 5*nutritionValue.age - 161
+            switch (nutritionValue.activity) {
+                case 'low':
+                    setCalories(cals * 1.375);
+                    break
+                case 'medium':
+                    setCalories(cals * 1.55);
+                    break
+                case 'high':
+                    setCalories(cals * 1.725);
+                    break
+            }
+        }
+    }
+
     function dateFormatter(date) {
         return date.getFullYear() + "-" + ("0"+(date.getMonth()+1)).slice(-2) + "-" +
         ("0" + date.getDate()).slice(-2);
@@ -178,15 +216,8 @@ const NutritionCalc = () => {
         } else {
             setIsRecap(false)
         }
-        console.log('g')
     }, [nutritionValue])
-    
-    // useEffect(() => {
-    //     const interval = setInterval(() => {
-    //       setLetter(prevValue => prevValue === 'H' ? 'W' : 'H')
-    //     }, 1000);
-    //     return () => clearInterval(interval);
-    //   }, []);
+
     return (
         <div className='nutritioncalculator flex-column-css'>
             {isRecap && activeStep!==7 && <Button size='large' onClick={()=>handleNavigation('recap')}>Recap</Button>}
@@ -563,29 +594,30 @@ const NutritionCalc = () => {
                     <h1 className='m-3' style={{fontFamily: 'Comfortaa, cursive'}}>Check your Informations !</h1>
                     <div className='col-sm-12 col-md-8 app-desciptions d-flex flex-column justify-content-center align-items-start'>
                         <p className='desc-diet'>- I'm 
-                            <span className='span-navigation' onClick={()=>handleNavigation('age')}> {nutritionValue.age}</span> years old 
-                            <span className='span-navigation' onClick={()=>handleNavigation('gender')}> {nutritionValue.gender}</span>, I am 
-                            <span className='span-navigation' onClick={()=>handleNavigation('height')}> {nutritionValue.height} cm</span> and I weigh 
-                            <span className='span-navigation' onClick={()=>handleNavigation('weight')}> {nutritionValue.weight} kg</span>.
+                            <Tooltip title="Doucle Click to Change"><span className='span-navigation' onDoubleClick={()=>handleNavigation('age')}> {nutritionValue.age}</span></Tooltip> years old 
+                            <Tooltip title="Doucle Click to Change"><span className='span-navigation' onDoubleClick={()=>handleNavigation('gender')}> {nutritionValue.gender}</span></Tooltip>, I am 
+                            <Tooltip title="Doucle Click to Change"><span className='span-navigation' onDoubleClick={()=>handleNavigation('height')}> {nutritionValue.height} cm</span></Tooltip> and I weigh 
+                            <Tooltip title="Doucle Click to Change"><span className='span-navigation' onDoubleClick={()=>handleNavigation('weight')}> {nutritionValue.weight} kg</span></Tooltip>.
                         </p>
                         {nutritionValue.goalWeight !== nutritionValue.weight 
                         ?   <p className='desc-diet'>
                                 - I want to 
-                                <span className='span-navigation' onClick={()=>handleNavigation('goalWeight')}> {nutritionValue.goalWeight-nutritionValue.weight > 0 ? 'gain ' : 'lose '}</span>
-                                <span className='span-navigation-v2' onClick={()=>handleNavigation('goalWeight')}> {nutritionValue.goalWeight-nutritionValue.weight > 0 ? nutritionValue.goalWeight-nutritionValue.weight : nutritionValue.weight-nutritionValue.goalWeight} kg</span> by 
-                                <span className='span-navigation' onClick={()=>handleNavigation('goalDate')}> {nutritionValue.goalDate}</span>
+                                <Tooltip title="Doucle Click to Change"><span className='span-navigation' onDoubleClick={()=>handleNavigation('goalWeight')}> {nutritionValue.goalWeight-nutritionValue.weight > 0 ? 'gain ' : 'lose '}</span></Tooltip>
+                                <Tooltip title="Doucle Click to Change"><span className='span-navigation-v2' onDoubleClick={()=>handleNavigation('goalWeight')}> {nutritionValue.goalWeight-nutritionValue.weight > 0 ? nutritionValue.goalWeight-nutritionValue.weight : nutritionValue.weight-nutritionValue.goalWeight} kg</span></Tooltip> by 
+                                <Tooltip title="Doucle Click to Change"><span className='span-navigation' onDoubleClick={()=>handleNavigation('goalDate')}> {nutritionValue.goalDate}</span></Tooltip>
                             </p>
                         : <p className='desc-diet'>- I want to keep my weight!</p>
                         }
                         <p className='desc-diet'>- I am 
-                            <span className='span-navigation' onClick={()=>handleNavigation('activity')}> {nutritionValue.activity+'ly'}</span> active during the day, and I workout 
-                            <span className='span-navigation' onClick={()=>handleNavigation('workout')}> {nutritionValue.workout+'ly'}</span> !
+                            <Tooltip title="Doucle Click to Change"><span className='span-navigation' onDoubleClick={()=>handleNavigation('activity')}> {nutritionValue.activity+'ly'}</span></Tooltip> active during the day, and I workout 
+                            <Tooltip title="Doucle Click to Change"><span className='span-navigation' onDoubleClick={()=>handleNavigation('workout')}> {nutritionValue.workout+'ly'}</span></Tooltip> !
                         </p>
                         <p className='desc-diet'>- I prefer 
-                            <span className='span-navigation' onClick={()=>handleNavigation('eatStyle')}> {nutritionValue.eatStyle}</span> food
+                            <Tooltip title="Doucle Click to Change"><span className='span-navigation' onDoubleClick={()=>handleNavigation('eatStyle')}> {nutritionValue.eatStyle}</span></Tooltip> food
                         </p>
                     </div>
-                    <Button size='medium'>Generate</Button>
+                    {!isCalories && <Button size='medium' onClick={generateCalories}>Generate</Button>}
+                    {isCalories && <h1>{calories}</h1>}
                 </div>
             }
             
