@@ -13,12 +13,16 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import { FiSkipForward } from 'react-icons/fi';
 
 const singleQuote = "'"
 const doubleQuotes = '"'
+var thisDate = new Date();
 
 const NutritionCalc = () => {
     const theme = useTheme();
+    const navigate = useNavigate();
     const [activeStep, setActiveStep] = useState(0);
     const [nutritionValue, setNutritionValue] = useState({
         age: '',
@@ -119,11 +123,15 @@ const NutritionCalc = () => {
                 }
                 if (e.target.name === 'goalWeight' || e.target.name === 'goalDate') {
                     if (e.target.name === 'goalDate') {
-                        var thisDate = new Date();
-                        if (dateFormatter(thisDate) <= e.target.value) {
+                        if (nutritionValue.weight === nutritionValue.goalWeight) {
                             newArray[8] = true;
                         } else {
-                            newArray[8] = false;
+                            var thisDate = new Date();
+                            if (dateFormatter(thisDate) <= e.target.value) {
+                                newArray[8] = true;
+                            } else {
+                                newArray[8] = false;
+                            }
                         }
                     }
                     if (e.target.name === 'goalWeight') {
@@ -138,6 +146,12 @@ const NutritionCalc = () => {
                 return newArray;
             })
         }
+    }
+
+    const skipGoal = () => {
+        const thisTime = Date.now();
+        setNutritionValue({...nutritionValue, goalWeight: nutritionValue.weight, goalDate: thisTime});
+        setActiveStep(4)
     }
 
     const generateCalories = () => {
@@ -169,6 +183,12 @@ const NutritionCalc = () => {
                     break
             }
         }
+    }
+
+    const applyResults = (cals, nutriValues) => {
+        localStorage.setItem('calories', cals)
+        localStorage.setItem('nutritionValues', nutriValues)
+        navigate('/diets')
     }
 
     function dateFormatter(date) {
@@ -340,6 +360,9 @@ const NutritionCalc = () => {
             {activeStep === 3 && 
             <div className='container flex-column-css'>
                 <h1 className='m-3' style={{fontFamily: 'Comfortaa, cursive'}}>What's your Weight Goal ?</h1>
+                <Button className='mb-3' variant="outlined" color='success' endIcon={<FiSkipForward />} onClick={skipGoal}>
+                    Skip This Part
+                </Button>
                 <h6>
                     (<b style={{fontWeight: '900'}}>{body.weight === 'kg' ? 23 : 50} </b>
                     {"<"} Valid Weight  
@@ -369,6 +392,7 @@ const NutritionCalc = () => {
                             </Select>
                         ),
                     }}/>
+                {nutritionValue.goalWeight!=='' && nutritionValue.goalWeight!==nutritionValue.weight && <>
                 <h3 className='m-3' style={{fontFamily: 'Comfortaa, cursive'}}>By which date ?</h3>
                 <TextField 
                     className='calculator-textfield mx-3' 
@@ -376,9 +400,11 @@ const NutritionCalc = () => {
                     variant="outlined"
                     value={nutritionValue.goalDate}
                     name='goalDate'
+                    error={dateFormatter(thisDate) > nutritionValue.goalDate}
                     onChange={handleChange}
                     type='date'
                     inputProps={{style: {textAlign: 'center', fontSize: 30, fontFamily: 'Noto Sans Mono, monospace'}}}/>
+                </>}
             </div>}
 
             {activeStep === 4 && 
@@ -617,7 +643,11 @@ const NutritionCalc = () => {
                         </p>
                     </div>
                     {!isCalories && <Button size='medium' onClick={generateCalories}>Generate</Button>}
-                    {isCalories && <h1>{calories}</h1>}
+                    {isCalories && <>
+                        <h5>You need to eat : </h5>
+                        <h3>{calories} Calories / Day</h3>
+                        <Button size='medium' onClick={()=>applyResults(calories, nutritionValue)}>Apply</Button>
+                    </>}
                 </div>
             }
             

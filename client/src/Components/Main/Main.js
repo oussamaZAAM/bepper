@@ -1,8 +1,17 @@
-import React from 'react'
+import { Button } from '@mui/material'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import NutritionCalc from '../NutritionCalc/NutritionCalc'
 import './Main.css'
 
 const Main = () => {
+    const existingCalories = localStorage.getItem('calories');
+    const [isDietExist, setIsDietExist] = useState(existingCalories);
+    const navigate = useNavigate();
+    const changeDiet = () => {
+        localStorage.removeItem('calories')
+        setIsDietExist(false)
+    }
   return (
     <div className='container main-position'>
         <div className='container flex-center bg-container title-text '>
@@ -22,9 +31,23 @@ const Main = () => {
         </div>
         <div className='calories-calc'>
 
-        <div className='container flex-center'>
-            <NutritionCalc />
-        </div>
+        {!isDietExist 
+            ? <div className='container flex-center'>
+                <NutritionCalc />
+            </div>
+            : <div className='container flex-center row'>
+                <div className='container row flex-center text-center'>
+                    <div className='col-12'>
+                        <h1 className='title'>Your daily Diet</h1>
+                    </div>
+                    <h4 className='title'><span className='calories'>{existingCalories}</span> calories per day.</h4>
+                    <div className='container row flex-column-css'>
+                        <Button onClick={()=>navigate('/diets')} variant='outlined' className='m-2 col-sm-12 col-md-6 col-lg-4' color='success'>Check your Diet</Button>
+                        <Button onClick={changeDiet} variant='contained' className='m-2 col-sm-12 col-md-6 col-lg-4' color='success'>Change your daily Diet</Button>
+                    </div>
+                </div>
+            </div>
+        }
 
         </div>
         <div className='container app-desc flex-column-css'>

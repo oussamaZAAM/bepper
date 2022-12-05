@@ -144,3 +144,8 @@
     cursor: pointer;
     color: rgb(176, 221, 129)
 }
+
+.calories{
+    color: rgba(93,175,47,1);
+    font-size: 44;
+}
