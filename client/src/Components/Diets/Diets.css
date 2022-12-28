@@ -1,0 +1,37 @@
+.meals-background{
+    background-color: #FDFAF6;
+    border: 1px solid #000;
+    border-radius: 10px;
+    width: 100%;
+}
+.meals-background:hover{
+    border: 0px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.regenerate{
+    background-color: white;
+    border-radius: 10px;
+}
+.text-overflow{
+    overflow:hidden; 
+    white-space:nowrap; 
+    text-overflow: ellipsis;
+}
+.meals{
+    margin-top: 1rem;
+    border-radius: 10px;
+    border: 1px solid black;
+    width: 100vh;
+}
+.meals:hover{
+    cursor: pointer;
+}
+.meals-breakfast:hover{
+    background-color: rgb(255, 219, 137, 0.5)
+}
+.meals-lunch:hover{
+    background-color: rgb(133, 0, 0, 0.5)
+}
+.meals-dinner:hover{
+    background-color: rgb(220, 0, 0, 0.5)
+}

@@ -54,24 +54,24 @@ const Main = () => {
                 <div className='row'><h1 className='col-12 title col-12'>Bell Pepper</h1></div>
                 <div className='row mt-5'>
                     <div className='col-sm-12 col-md-6 app-desciptions flex-column-css'>
-                        <img className='logo-size' src={require("../../Logos/logo/logo-green.png")} />
+                        <img alt='normal-logo' className='logo-size' src={require("../../Logos/logo/logo-green.png")} />
                         <h5>Schedule Your Day's Food</h5>
                         <p className='desc-textarea'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque lobortis rhoncus. Proin luctus</p>
                     </div>
                     <div className='col-sm-12 col-md-6 app-desciptions flex-column-css'>
-                        <img className='logo-size' src={require("../../Logos/logo/logo-green.png")} />
+                        <img alt='normal-logo' className='logo-size' src={require("../../Logos/logo/logo-green.png")} />
                         <h5>Schedule Your Day's Food</h5>
                         <p className='desc-textarea'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque lobortis rhoncus. Proin luctus</p>
                     </div>
                 </div>
                 <div className='row mt-5'>
                     <div className='col-sm-12 col-md-6 app-desciptions flex-column-css'>
-                        <img className='logo-size' src={require("../../Logos/logo/logo-green.png")} />
+                        <img alt='normal-logo' className='logo-size' src={require("../../Logos/logo/logo-green.png")} />
                         <h5>Schedule Your Day's Food</h5>
                         <p className='desc-textarea'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque lobortis rhoncus. Proin luctus</p>
                     </div>
                     <div className='col-sm-12 col-md-6 app-desciptions flex-column-css'>
-                        <img className='logo-size' src={require("../../Logos/logo/logo-green.png")} />
+                        <img alt='normal-logo' className='logo-size' src={require("../../Logos/logo/logo-green.png")} />
                         <h5>Schedule Your Day's Food</h5>
                         <p className='desc-textarea'>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus scelerisque lobortis rhoncus. Proin luctus</p>
                     </div>

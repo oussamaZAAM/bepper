@@ -30,7 +30,7 @@ function Navbar(props) {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <div className='d-flex justify-content-center align-items-center'>
-      <img src={require('../../Logos/logo/logo-green.png')} className='img-responsive' />
+      <img alt='normal-logo' src={require('../../Logos/logo/logo-green.png')} className='img-responsive' />
       <Typography 
         variant="h6" 
         sx={{
@@ -74,7 +74,7 @@ function Navbar(props) {
           >
             <MenuIcon />
           </IconButton>
-          <img src={require('../../Logos/border logo/border-green.png')} className='img-responsive' />
+          <img alt='border-logo' src={require('../../Logos/border logo/border-green.png')} className='img-responsive' />
           <Typography
             className='bepper-text'
             variant="h6"

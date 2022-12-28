@@ -1,10 +1,10 @@
 import './App.css';
+import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from './Components/Navbar/Navbar';
 import { Footer } from './Components/Footer/Footer.js';
 import Footer2 from './Components/Footer/Footer2';
 import Main from './Components/Main/Main';
-import Screen from './Components/Screen/Screen';
 import Diets from './Components/Diets/Diets';
 
 function App() {

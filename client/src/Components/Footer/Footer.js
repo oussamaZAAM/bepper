@@ -4,8 +4,6 @@ import {
   MDBContainer,
   MDBCol,
   MDBRow,
-  MDBIcon,
-  MDBBtn,
   MDBInput
 } from 'mdb-react-ui-kit';
 import "./Footer.css"
@@ -19,7 +17,7 @@ export function Footer() {
         <form action=''>
           <MDBRow className='d-flex justify-content-center p-3'>
             <MDBCol size='auto' className='mb-2'>
-              <img src='./green.png' className='img-responsive' />
+              <img alt='full-logo' src='./green.png' className='img-responsive' />
             </MDBCol>
             <MDBCol size='auto' className='mb-2'>
               <p className='pt-2'>
@@ -37,7 +35,7 @@ export function Footer() {
           </MDBRow>
         </form>
         <section className="d-flex align-items-center justify-content-between">
-          <img src={require('../../Logos/full logo/green.png')} className='img-responsive' />
+          <img alt='full-logo' src={require('../../Logos/full logo/green.png')} className='img-responsive' />
           <div className='d-flex align-items-center justify-content-center'>
 
             <div className="border-hover"><a href="#" className="cool-link text-dark mx-2">Contact Us</a></div>

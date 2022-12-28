@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./NutritionCalc.css"
 
-import { Button, createTheme, MenuItem, NativeSelect, Select, TextField, Tooltip } from '@mui/material'
+import { Button, MenuItem, Select, TextField, Tooltip } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import MobileStepper from '@mui/material/MobileStepper';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
@@ -660,6 +660,7 @@ const NutritionCalc = () => {
                     maxWidth: 400, 
                     flexGrow: 1, 
                     width: '100%',
+                    color: 'rgba(93,175,47,1)'
                 }}
                 nextButton={
                     <Button size="small" onClick={handleNext} disabled={activeStep === 7 || !nutritionState[activeStep]}>
