@@ -1,0 +1,34 @@
+.cont_photo {
+  width: 120%;
+  height: 300px;
+  overflow: hidden;
+  background-color: #eee;
+  border-radius:5px;
+  top: -20px;
+  float: left;
+  z-index: 2;
+  -webkit-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+  transition: all 0.5s; 
+  box-shadow: 1px 1px 20px -5px rgba(0,0,0,0.5);  
+}
+
+.cont_img_back {
+  height: 100%;
+  overflow: hidden;
+  border-radius:5px ;
+}
+.cont_img_back > img {
+  opacity: 1;
+  object-fit: contain;
+  -webkit-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+  transition: all 1s;
+}
+
+.cont_img_back:hover > img {
+  transform: scale(1.5);
+}
+

@@ -7,10 +7,41 @@ import "./Diets.css";
 import Fade from '@mui/material/Fade';
 import {Button} from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
+import ImageEffect from './ImageEffect';
 
 
 const Diets = () => {
     const existingCalories = localStorage.getItem('calories');
+
+  //   const food = [
+  //     {
+  //         "id": 636026,
+  //         "imageType": "jpg",
+  //         "title": "Breakfast Biscuits and Gravy",
+  //         "readyInMinutes": 45,
+  //         "servings": 4,
+  //         "sourceUrl": "https://spoonacular.com/breakfast-biscuits-and-gravy-636026"
+  //     },
+  //     {
+  //         "id": 643634,
+  //         "imageType": "jpg",
+  //         "title": "Macaroni with Fresh Tomatoes and Beans",
+  //         "readyInMinutes": 25,
+  //         "servings": 4,
+  //         "sourceUrl": "https://spoonacular.com/macaroni-with-fresh-tomatoes-and-beans-643634"
+  //     },
+  //     {
+  //         "id": 643781,
+  //         "imageType": "jpg",
+  //         "title": "Fried Ravioli & Mint Parsley Pesto",
+  //         "readyInMinutes": 45,
+  //         "servings": 4,
+  //         "sourceUrl": "https://spoonacular.com/fried-ravioli-mint-parsley-pesto-643781"
+  //     }
+  // ]
+  //   const breakfast = food[0]
+  //   const lunch = food[1]
+  //   const dinner = food[2]
     
 
     const [food, setFood] = useState();
@@ -79,25 +110,35 @@ const Diets = () => {
                 Refresh
               </Button>}
             </div>
-            <div className="col-11 col-md-5 col-lg-3 m-2 px-3 flex-column-css">
+            
+            <div className="col-12 col-md-5 col-lg-4 p-3 flex-column-css">
               <h4 style={{color: '#FFDB89'}}>Breakfast</h4>
               <div className='w-100 m-2 p-3 meals meals-breakfast flex-column-css align-items-start'>
+                <div className='w-100 my-2 flex-center'>
+                  <ImageEffect meal={breakfast} />
+                </div>
                 <h4>{breakfast.title}</h4>
                 <p>Servings: <b>{breakfast.servings}</b></p>
                 <p>Ready in: <b>{breakfast.readyInMinutes}</b> minutes</p>
               </div>
             </div>
-            <div className="col-11 col-md-5 col-lg-3 m-2 px-3 flex-column-css">
+            <div className="col-12 col-md-5 col-lg-4 p-3 flex-column-css">
               <h4 style={{color: '#850000'}}>Lunch</h4>
               <div className='w-100 m-2 p-3 meals meals-lunch flex-column-css align-items-start'>
+                <div className='w-100 my-2 flex-center'>
+                  <ImageEffect meal={lunch} />
+                </div>
                 <h4>{lunch.title}</h4>
                 <p>Servings: <b>{lunch.servings}</b></p>
                 <p>Ready in: <b>{lunch.readyInMinutes}</b> minutes</p>
               </div>
             </div>
-            <div className="col-11 col-md-5 col-lg-3 m-2 px-3 flex-column-css">
+            <div className="col-12 col-md-5 col-lg-4 p-3 flex-column-css">
               <h4 style={{color: '#DC0000'}}>Dinner</h4>
               <div className='w-100 m-2 p-3 meals meals-dinner flex-column-css align-items-start'>
+                <div className='w-100 my-2 flex-center'>
+                  <ImageEffect meal={dinner} />
+                </div>
                 <h4>{dinner.title}</h4>
                 <p>Servings: <b>{dinner.servings}</b></p>
                 <p>Ready in: <b>{dinner.readyInMinutes}</b> minutes</p>
