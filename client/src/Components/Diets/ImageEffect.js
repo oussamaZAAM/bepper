@@ -2,7 +2,6 @@ import React from 'react'
 import "./ImageEffect.css"
 
 const ImageEffect = (props) => {
-    console.log(props)
    
   return (
     <div className="flex-center cont_photo">
