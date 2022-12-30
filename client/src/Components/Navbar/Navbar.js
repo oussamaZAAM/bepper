@@ -15,9 +15,16 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 
 import "./Navbar.css"
+import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];
+
+const user = localStorage.getItem('token');
+const handleSignout = () => {
+  localStorage.removeItem("token");
+  window.location.reload();
+};
 
 function Navbar(props) {
   const { window } = props;
@@ -95,16 +102,21 @@ function Navbar(props) {
             BEPPER
           </Typography></div>
           <div className="d-flex align-items-center justify-content-between">
-          <Box sx={{ display: { xs: 'none', sm: 'flex' }, justifyContent: 'flex-end', marginRight: '30px' }}>
-            {navItems.map((item) => (
-              <Button className='bepper-button' key={item} sx={{ color: '#fff' }}>
-                {item}
-              </Button>
-            ))}
-          </Box>
-          <Button className="signin-nav">
-            Sign in
-          </Button></div>
+            <Box sx={{ display: { xs: 'none', sm: 'flex' }, justifyContent: 'flex-end', marginRight: '30px' }}>
+              {navItems.map((item) => (
+                <Button className='bepper-button' key={item} sx={{ color: '#fff' }}>
+                  {item}
+                </Button>
+              ))}
+            </Box>
+            {!user 
+            ? <Link style={{textDecoration: 'none'}} to="/signin"><Button className="signin-nav">
+              Sign in
+            </Button></Link>
+            : <Button className="signin-nav" onClick={handleSignout}>
+            Sign out
+          </Button>}
+          </div>
         </Toolbar>
       </AppBar>
       <Box component="nav">

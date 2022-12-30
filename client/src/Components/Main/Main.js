@@ -5,6 +5,7 @@ import NutritionCalc from '../NutritionCalc/NutritionCalc'
 import './Main.css'
 
 const Main = () => {
+
     const existingCalories = localStorage.getItem('calories');
     const [isDietExist, setIsDietExist] = useState(existingCalories);
     const navigate = useNavigate();

@@ -13,6 +13,7 @@ import ImageEffect from './ImageEffect';
 
 
 const Diets = () => {
+    const { REACT_APP_BASE_URL } = process.env;
     const existingCalories = localStorage.getItem('calories');
 
   //   const food = [
@@ -76,7 +77,7 @@ const Diets = () => {
 
     useEffect(()=>{
       const fetchKey = async () => {
-        const res = await axios.get("http://localhost:5000/api/api-key");
+        const res = await axios.get(REACT_APP_BASE_URL+"/api/api-key");
         setKey(res.data);
       }
       fetchKey();
@@ -125,14 +126,14 @@ const Diets = () => {
                 </Fade>
               </Box>}
               {!loading && <Button style={{height: 40, color: 'rgba(93,175,47,1)'}} onClick={handleClickLoading}>
-                Refresh
+                Regenerate
               </Button>}
             </div>
             
             {food ? <>
               <div className="col-12 col-md-5 col-lg-4 p-3 flex-column-css">
                 <h4 style={{color: '#FFDB89'}}>Breakfast</h4>
-                <Tooltip title={isBreakfastSaved ? "Click to Unsave" : "Click to Save"} followCursor onClick={()=>SaveMeal('breakfast')}>
+                <Tooltip title={isBreakfastSaved ? "Click to Unleash" : "Click to Hold when regenrating"} followCursor onClick={()=>SaveMeal('breakfast')}>
                   <div 
                     className='w-100 m-2 p-3 meals meals-breakfast flex-column-css align-items-start'
                     style={{backgroundColor: isBreakfastSaved && "rgb(255, 219, 137, 0.75)"}}
@@ -149,7 +150,7 @@ const Diets = () => {
 
               <div className="col-12 col-md-5 col-lg-4 p-3 flex-column-css">
                 <h4 style={{color: '#FFDB89'}}>Lunch</h4>
-                <Tooltip title={isLunchSaved ? "Click to Unsave" : "Click to Save"} followCursor onClick={()=>SaveMeal('lunch')}>
+                <Tooltip title={isLunchSaved ? "Click to Unleash" : "Click to Hold when regenrating"} followCursor onClick={()=>SaveMeal('lunch')}>
                   <div 
                     className='w-100 m-2 p-3 meals meals-lunch flex-column-css align-items-start'
                     style={{backgroundColor: isLunchSaved && "rgb(133, 0, 0, 0.75)"}}
@@ -166,7 +167,7 @@ const Diets = () => {
               
               <div className="col-12 col-md-5 col-lg-4 p-3 flex-column-css">
                 <h4 style={{color: '#FFDB89'}}>Dinner</h4>
-                <Tooltip title={isDinnerSaved ? "Click to Unsave" : "Click to Save"} followCursor onClick={()=>SaveMeal('dinner')}>
+                <Tooltip title={isDinnerSaved ? "Click to Unleash" : "Click to Hold when regenrating"} followCursor onClick={()=>SaveMeal('dinner')}>
                   <div 
                     className='w-100 m-2 p-3 meals meals-dinner flex-column-css align-items-start'
                     style={{backgroundColor: isDinnerSaved && "rgb(220, 0, 0, 0.75)"}}
