@@ -11,6 +11,9 @@ const Main = () => {
     const navigate = useNavigate();
     const changeDiet = () => {
         localStorage.removeItem('calories')
+        localStorage.removeItem('breakfast')
+        localStorage.removeItem('lunch')
+        localStorage.removeItem('dinner')
         setIsDietExist(false)
     }
   return (

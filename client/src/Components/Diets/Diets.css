@@ -27,12 +27,58 @@
     cursor: pointer;
 }
 .meals-breakfast:hover{
-    background-color: rgb(255, 219, 137, 0.5)
+    background-color: rgb(249, 102, 102, 0.5)
 }
 .meals-lunch:hover{
-    background-color: rgb(133, 0, 0, 0.5)
+    background-color: rgb(103, 71, 71, 0.5)
 }
 .meals-dinner:hover{
-    background-color: rgb(220, 0, 0, 0.5)
+    background-color: rgb(130, 148, 96, 0.5)
 }
 
+.save-icon{
+    display: none;
+    z-index: 99;
+    margin: 0;
+    width: 100%;
+    text-align: center;
+    margin-top: -8rem ;
+    margin-bottom: 5rem;
+}
+.meals-breakfast:hover .save-icon{
+    display: flex;
+}
+.meals-lunch:hover .save-icon{
+    display: flex;
+}
+.meals-dinner:hover .save-icon{
+    display: flex;
+}
+.save-icon > svg{
+    display: none;
+    padding: 10px;
+    border: 1px solid black;
+    border-radius: 100px;
+    background-color: rgb(255, 255, 255, 0.5);
+}
+.save-icon > svg:hover{
+    background-color: rgb(255, 255, 255, 0.85);
+}
+.meals-breakfast:hover .save-icon > svg {
+    display: flex;
+}
+.meals-lunch:hover .save-icon > svg {
+    display: flex;
+}
+.meals-dinner:hover .save-icon > svg {
+    display: flex;
+}
+.meals-breakfast:hover .blurred{
+    filter: blur(0.1rem);
+}
+.meals-lunch:hover .blurred{
+    filter: blur(0.1rem);
+}
+.meals-dinner:hover .blurred{
+    filter: blur(0.1rem);
+}

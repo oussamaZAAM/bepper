@@ -8,6 +8,8 @@ import Fade from '@mui/material/Fade';
 import {Button} from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
 
+import {BsFillBookmarkPlusFill} from 'react-icons/bs'
+
 import "./Diets.css";
 import ImageEffect from './ImageEffect';
 
@@ -63,7 +65,8 @@ const Diets = () => {
       setLoading(true);
     };
 
-    const SaveMeal = (meal) => {
+    const LockMeal = (meal, e) => {
+      e.stopPropagation();
       switch(meal) {
         case 'breakfast':
           setIsBreakfastSaved(prev => !prev)
@@ -75,6 +78,10 @@ const Diets = () => {
           setIsDinnerSaved(prev => !prev)
           break
       }
+    }
+    const SaveMeal = (e) => {
+      e.stopPropagation();
+      console.log(12);
     }
 
     useEffect(()=>{
@@ -142,52 +149,61 @@ const Diets = () => {
             
             {(breakfast && lunch && dinner) ? <>
               <div className="col-12 col-md-5 col-lg-4 p-3 flex-column-css">
-                <h4 style={{color: '#FFDB89'}}>Breakfast</h4>
-                <Tooltip title={isBreakfastSaved ? "Click to Unleash" : "Click to Hold when regenrating"} followCursor onClick={()=>SaveMeal('breakfast')}>
+                <h4 style={{color: '#F96666'}}>Breakfast</h4>
+                <Tooltip title={isBreakfastSaved ? "Click to Unlock" : "Click to Lock"} followCursor onClick={(e)=>LockMeal('breakfast', e)}>
                   <div 
-                    className='w-100 m-2 p-3 meals meals-breakfast flex-column-css align-items-start'
-                    style={{backgroundColor: isBreakfastSaved && "rgb(255, 219, 137, 0.75)"}}
+                    className='w-100 m-2 p-3 meals meals-breakfast flex-column-css align-items-start '
+                    style={{backgroundColor: isBreakfastSaved && "rgb(249, 102, 102, 0.75)"}}
                   >
-                    <div className='w-100 my-2 flex-center'>
-                      <ImageEffect meal={breakfast} />
+                    <div className={'w-100 my-2 flex-center '+(isBreakfastSaved && 'blurred')}>
+                      <ImageEffect className={isBreakfastSaved && 'bluurred'} meal={breakfast} />
                     </div>
-                    <h4>{breakfast.title}</h4>
-                    <p>Servings: <b>{breakfast.servings}</b></p>
-                    <p>Ready in: <b>{breakfast.readyInMinutes}</b> minutes</p>
+                    {isBreakfastSaved && <div className='save-icon flex-center'>
+                        <BsFillBookmarkPlusFill onClick={(e)=>SaveMeal(e)} size={50} style={{filter: 'drop-shadow(0 0 0.75rem rgb(249, 102, 102, 1))'}}/>
+                    </div>}
+                    <h4 className={isBreakfastSaved && 'blurred'}>{breakfast.title}</h4>
+                    <p className={isBreakfastSaved && 'blurred'}>Servings: <b>{breakfast.servings}</b></p>
+                    <p className={isBreakfastSaved && 'blurred'}>Ready in: <b>{breakfast.readyInMinutes}</b> minutes</p>
                   </div>
                 </Tooltip>
               </div>
 
               <div className="col-12 col-md-5 col-lg-4 p-3 flex-column-css">
-                <h4 style={{color: '#FFDB89'}}>Lunch</h4>
-                <Tooltip title={isLunchSaved ? "Click to Unleash" : "Click to Hold when regenrating"} followCursor onClick={()=>SaveMeal('lunch')}>
+                <h4 style={{color: '#674747'}}>Lunch</h4>
+                <Tooltip title={isLunchSaved ? "Click to Unlock" : "Click to Lock"} followCursor onClick={(e)=>LockMeal('lunch', e)}>
                   <div 
                     className='w-100 m-2 p-3 meals meals-lunch flex-column-css align-items-start'
-                    style={{backgroundColor: isLunchSaved && "rgb(133, 0, 0, 0.75)"}}
+                    style={{backgroundColor: isLunchSaved && "rgb(103, 71, 71, 0.75)"}}
                   >
-                    <div className='w-100 my-2 flex-center'>
-                      <ImageEffect meal={lunch} />
+                    <div className={'w-100 my-2 flex-center '+(isLunchSaved && 'blurred')}>
+                      <ImageEffect className={isLunchSaved && 'blurred'} meal={lunch} />
                     </div>
-                    <h4>{lunch.title}</h4>
-                    <p>Servings: <b>{lunch.servings}</b></p>
-                    <p>Ready in: <b>{lunch.readyInMinutes}</b> minutes</p>
+                    {isLunchSaved && <div className='save-icon flex-center'>
+                        <BsFillBookmarkPlusFill onClick={(e)=>SaveMeal(e)} size={50} style={{filter: 'drop-shadow(0 0 0.75rem rgb(103, 71, 71, 1))'}}/>
+                    </div>}
+                    <h4 className={isLunchSaved && 'blurred'}>{lunch.title}</h4>
+                    <p className={isLunchSaved && 'blurred'}>Servings: <b>{lunch.servings}</b></p>
+                    <p className={isLunchSaved && 'blurred'}>Ready in: <b>{lunch.readyInMinutes}</b> minutes</p>
                   </div>
                 </Tooltip>
               </div>
               
               <div className="col-12 col-md-5 col-lg-4 p-3 flex-column-css">
-                <h4 style={{color: '#FFDB89'}}>Dinner</h4>
-                <Tooltip title={isDinnerSaved ? "Click to Unleash" : "Click to Hold when regenrating"} followCursor onClick={()=>SaveMeal('dinner')}>
+                <h4 style={{color: '#829460'}}>Dinner</h4>
+                <Tooltip title={isDinnerSaved ? "Click to Unlock" : "Click to Lock"} followCursor onClick={(e)=>LockMeal('dinner', e)}>
                   <div 
                     className='w-100 m-2 p-3 meals meals-dinner flex-column-css align-items-start'
-                    style={{backgroundColor: isDinnerSaved && "rgb(220, 0, 0, 0.75)"}}
+                    style={{backgroundColor: isDinnerSaved && "rgb(130, 148, 96, 0.75)"}}
                   >
-                    <div className='w-100 my-2 flex-center'>
-                      <ImageEffect meal={dinner} />
+                    <div className={'w-100 my-2 flex-center '+(isDinnerSaved && 'blurred')}>
+                      <ImageEffect className={isDinnerSaved && 'blurred'} meal={dinner} />
                     </div>
-                    <h4>{dinner.title}</h4>
-                    <p>Servings: <b>{dinner.servings}</b></p>
-                    <p>Ready in: <b>{dinner.readyInMinutes}</b> minutes</p>
+                    {isDinnerSaved && <div className='save-icon flex-center'>
+                        <BsFillBookmarkPlusFill onClick={(e)=>SaveMeal(e)} size={50} style={{filter: 'drop-shadow(0 0 0.75rem rgb(130, 148, 96, 1))'}}/>
+                    </div>}
+                    <h4 className={isDinnerSaved && 'blurred'}>{dinner.title}</h4>
+                    <p className={isDinnerSaved && 'blurred'}>Servings: <b>{dinner.servings}</b></p>
+                    <p className={isDinnerSaved && 'blurred'}>Ready in: <b>{dinner.readyInMinutes}</b> minutes</p>
                   </div>
                 </Tooltip>
               </div>
