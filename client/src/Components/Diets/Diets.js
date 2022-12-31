@@ -15,6 +15,9 @@ import ImageEffect from './ImageEffect';
 const Diets = () => {
     const { REACT_APP_BASE_URL } = process.env;
     const existingCalories = localStorage.getItem('calories');
+    var existingBreakfast = JSON.parse(localStorage.getItem('breakfast'));
+    var existingLunch = JSON.parse(localStorage.getItem('lunch'));
+    var existingDinner = JSON.parse(localStorage.getItem('dinner'));
 
   //   const food = [
   //     {
@@ -46,18 +49,17 @@ const Diets = () => {
   //   const lunch = food[1]
   //   const dinner = food[2]
     
-
     const [key, setKey] = useState();
-    const [food, setFood] = useState();
-    const [breakfast, setBreakfast] = useState();
+    const [breakfast, setBreakfast] = useState(existingBreakfast && existingBreakfast);
     const [isBreakfastSaved, setIsBreakfastSaved] = useState(false);
-    const [lunch, setLunch] = useState();
+    const [lunch, setLunch] = useState(existingLunch && existingLunch);
     const [isLunchSaved, setIsLunchSaved] = useState(false);
-    const [dinner, setDinner] = useState();
+    const [dinner, setDinner] = useState(existingDinner && existingDinner);
     const [isDinnerSaved, setIsDinnerSaved] = useState(false);
     
     const [loading, setLoading] = useState(false);
     const handleClickLoading = () => {
+      localStorage.removeItem('breakfast');
       setLoading(true);
     };
 
@@ -87,13 +89,21 @@ const Diets = () => {
         //   'x-api-key': key
         // }
         })
-        setFood(res.data);
-        !isBreakfastSaved && setBreakfast(res.data.meals[0]);
-        !isLunchSaved && setLunch(res.data.meals[1]);
-        !isDinnerSaved && setDinner(res.data.meals[2]);
+        if (!isBreakfastSaved){
+          setBreakfast(res.data.meals[0]);
+          localStorage.setItem('breakfast', JSON.stringify(res.data.meals[0]));
+        }
+        if (!isLunchSaved){
+          setLunch(res.data.meals[1]);
+          localStorage.setItem('lunch', JSON.stringify(res.data.meals[1]));
+        }
+        if (!isDinnerSaved){
+          setDinner(res.data.meals[2]);
+          localStorage.setItem('dinner', JSON.stringify(res.data.meals[2]));
+        }
         setLoading(false);
       }
-      key && (!isBreakfastSaved || !isLunchSaved || !isDinnerSaved) ? fetchFood() : setLoading(false);
+      !existingBreakfast && key && (!isBreakfastSaved || !isLunchSaved || !isDinnerSaved) ? fetchFood() : setLoading(false);
     }, [key, loading])
   return existingCalories && (
     <div className='container main-position'>
@@ -130,7 +140,7 @@ const Diets = () => {
               </Button>}
             </div>
             
-            {food ? <>
+            {(breakfast && lunch && dinner) ? <>
               <div className="col-12 col-md-5 col-lg-4 p-3 flex-column-css">
                 <h4 style={{color: '#FFDB89'}}>Breakfast</h4>
                 <Tooltip title={isBreakfastSaved ? "Click to Unleash" : "Click to Hold when regenrating"} followCursor onClick={()=>SaveMeal('breakfast')}>
