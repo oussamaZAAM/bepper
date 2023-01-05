@@ -16,19 +16,32 @@ import Button from '@mui/material/Button';
 
 import "./Navbar.css"
 import { Link } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];
 
-const user = localStorage.getItem('token');
-const handleSignout = () => {
-  localStorage.removeItem("token");
+
+function RefreshPage(){
   window.location.reload();
-};
+}
+
+
 
 function Navbar(props) {
+  const [cookie, setCookie, removeCookie] = useCookies("token");
+  const user = cookie.token;
+  
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const handleSignout = () => {
+    removeCookie("token");
+    localStorage.removeItem("breakfast");
+    localStorage.removeItem("lunch");
+    localStorage.removeItem("dinner");
+    RefreshPage();
+  };
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);

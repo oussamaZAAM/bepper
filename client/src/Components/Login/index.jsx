@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { useCookies } from 'react-cookie'
 import axios from "axios";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
 
 const Login = () => {
+	const [cookie, setCookie, removeCookie] = useCookies("token");
     const { REACT_APP_BASE_URL } = process.env;
 	const [data, setData] = useState({ email: "", password: "" });
 	const [error, setError] = useState("");
@@ -17,7 +19,7 @@ const Login = () => {
 		try {
 			const url = REACT_APP_BASE_URL+"/api/auth";
 			const { data: res } = await axios.post(url, data);
-			localStorage.setItem("token", res.data);
+			setCookie("token", res.data);
 			window.location = "/";
 		} catch (error) {
 			if (

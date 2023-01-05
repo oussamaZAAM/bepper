@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 
+import {BsFillBookmarkPlusFill} from 'react-icons/bs'
 import LinearProgress from '@mui/material/LinearProgress';
 import Box from '@mui/material/Box';
 import Tooltip from '@mui/material/Tooltip';
 import Fade from '@mui/material/Fade';
-import {Button} from '@mui/material';
+import {Button, Skeleton, Typography} from '@mui/material';
 import CircularProgress from '@mui/material/CircularProgress';
-
-import {BsFillBookmarkPlusFill} from 'react-icons/bs'
 
 import "./Diets.css";
 import ImageEffect from './ImageEffect';
@@ -52,14 +51,26 @@ const Diets = () => {
   //   const dinner = food[2]
     
     const [key, setKey] = useState();
+
     const [breakfast, setBreakfast] = useState(existingBreakfast && existingBreakfast);
     const [isBreakfastSaved, setIsBreakfastSaved] = useState(false);
     const [lunch, setLunch] = useState(existingLunch && existingLunch);
     const [isLunchSaved, setIsLunchSaved] = useState(false);
     const [dinner, setDinner] = useState(existingDinner && existingDinner);
     const [isDinnerSaved, setIsDinnerSaved] = useState(false);
-    
+
     const [loading, setLoading] = useState(false);
+    const [breakfastLoader, setBreakfastLoader] = useState(false);
+    const [lunchLoader, setLunchLoader] = useState(false);
+    const [dinnerLoader, setDinnerLoader] = useState(false);
+
+    function SkeletonComponent() {
+      return (<Skeleton width="100%" sx={{marginTop: '-23vh', marginBottom: '-21vh'}}>
+          <div style={{ height: '110vh' }} />
+        </Skeleton>)
+    }
+
+
     const handleClickLoading = () => {
       localStorage.removeItem('breakfast');
       setLoading(true);
@@ -82,6 +93,7 @@ const Diets = () => {
     const SaveMeal = (e) => {
       e.stopPropagation();
       console.log(12);
+      //Service coming soon ...
     }
 
     useEffect(()=>{
@@ -91,6 +103,9 @@ const Diets = () => {
       }
       fetchKey();
       const fetchFood = async () => {
+        !isBreakfastSaved && setBreakfastLoader(true);
+        !isLunchSaved && setLunchLoader(true);
+        !isDinnerSaved && setDinnerLoader(true);
         const res = await axios.get("https://api.spoonacular.com/mealplanner/generate?apiKey="+key+"&timeFrame=day&targetCalories="+existingCalories, {
         // headers: {
         //   'x-api-key': key
@@ -109,6 +124,9 @@ const Diets = () => {
           localStorage.setItem('dinner', JSON.stringify(res.data.meals[2]));
         }
         setLoading(false);
+        setBreakfastLoader(false);
+        setLunchLoader(false);
+        setDinnerLoader(false);
       }
       !existingBreakfast && key && (!isBreakfastSaved || !isLunchSaved || !isDinnerSaved) ? fetchFood() : setLoading(false);
     }, [key, loading])
@@ -150,7 +168,7 @@ const Diets = () => {
             {(breakfast && lunch && dinner) ? <>
               <div className="col-12 col-md-5 col-lg-4 p-3 flex-column-css">
                 <h4 style={{color: '#F96666'}}>Breakfast</h4>
-                <Tooltip title={isBreakfastSaved ? "Click to Unlock" : "Click to Lock"} followCursor onClick={(e)=>LockMeal('breakfast', e)}>
+                {!breakfastLoader ? <Tooltip title={isBreakfastSaved ? "Click to Unlock" : "Click to Lock"} followCursor onClick={(e)=>LockMeal('breakfast', e)}>
                   <div 
                     className='w-100 m-2 p-3 meals meals-breakfast flex-column-css align-items-start '
                     style={{backgroundColor: isBreakfastSaved && "rgb(249, 102, 102, 0.75)"}}
@@ -166,11 +184,13 @@ const Diets = () => {
                     <p className={isBreakfastSaved && 'blurred'}>Ready in: <b>{breakfast.readyInMinutes}</b> minutes</p>
                   </div>
                 </Tooltip>
+                : <SkeletonComponent />
+            }
               </div>
 
               <div className="col-12 col-md-5 col-lg-4 p-3 flex-column-css">
                 <h4 style={{color: '#674747'}}>Lunch</h4>
-                <Tooltip title={isLunchSaved ? "Click to Unlock" : "Click to Lock"} followCursor onClick={(e)=>LockMeal('lunch', e)}>
+                {!lunchLoader ? <Tooltip title={isLunchSaved ? "Click to Unlock" : "Click to Lock"} followCursor onClick={(e)=>LockMeal('lunch', e)}>
                   <div 
                     className='w-100 m-2 p-3 meals meals-lunch flex-column-css align-items-start'
                     style={{backgroundColor: isLunchSaved && "rgb(103, 71, 71, 0.75)"}}
@@ -186,11 +206,13 @@ const Diets = () => {
                     <p className={isLunchSaved && 'blurred'}>Ready in: <b>{lunch.readyInMinutes}</b> minutes</p>
                   </div>
                 </Tooltip>
+                : <SkeletonComponent />
+          }
               </div>
               
               <div className="col-12 col-md-5 col-lg-4 p-3 flex-column-css">
                 <h4 style={{color: '#829460'}}>Dinner</h4>
-                <Tooltip title={isDinnerSaved ? "Click to Unlock" : "Click to Lock"} followCursor onClick={(e)=>LockMeal('dinner', e)}>
+                {!dinnerLoader ? <Tooltip title={isDinnerSaved ? "Click to Unlock" : "Click to Lock"} followCursor onClick={(e)=>LockMeal('dinner', e)}>
                   <div 
                     className='w-100 m-2 p-3 meals meals-dinner flex-column-css align-items-start'
                     style={{backgroundColor: isDinnerSaved && "rgb(130, 148, 96, 0.75)"}}
@@ -206,6 +228,8 @@ const Diets = () => {
                     <p className={isDinnerSaved && 'blurred'}>Ready in: <b>{dinner.readyInMinutes}</b> minutes</p>
                   </div>
                 </Tooltip>
+                : <SkeletonComponent />
+        }
               </div>
 
             </>

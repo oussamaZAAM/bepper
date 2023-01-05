@@ -11,8 +11,6 @@ import Login from "./Components/Login";
 import EmailVerify from "./Components/EmailVerify";
 
 function App() {
-	const user = localStorage.getItem("token");
-  console.log(user)
 
   return (
     <BrowserRouter>
