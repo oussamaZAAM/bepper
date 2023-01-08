@@ -19,25 +19,47 @@ const oAuth2Client = new google.auth.OAuth2(
 
 module.exports = async (email, subject, text) => {
 	try {
-		// const transporter = nodemailer.createTransport({
-		// 	service: process.env.SERVICE,
-		// 	port: Number(process.env.EMAIL_PORT),
-		// 	secure: Boolean(process.env.SECURE),
-		// 	auth: {
-		// 		user: process.env.USER,
-		// 		pass: process.env.PASS,
-		// 	},
-		// });
+		const htmlTemplate = 
+		`<td class="esd-stripe" align="center">
+		<table class="es-content-body" style="border-left:1px solid transparent;border-right:1px solid transparent;border-top:1px solid transparent;border-bottom:1px solid transparent;" align="center" width="600" cellspacing="0" cellpadding="0" bgcolor="#ffffff">
+			<tbody>
+				<tr>
+					<td class="esd-structure es-p20t es-p40b es-p40r es-p40l" esd-custom-block-id="8537" align="left">
+						<table width="100%" cellspacing="0" cellpadding="0">
+							<tbody>
+								<tr>
+									<td class="esd-container-frame" align="left" width="518">
+										<table width="100%" cellspacing="0" cellpadding="0">
+											<tbody>
+												<tr>
+													<td class="esd-block-image es-m-txt-c es-p5b" align="center" style="font-size:0"><a target="_blank"><img src="https://i.ibb.co/PrxxsYC/yellow.png" alt="icon" style="display: block;" title="icon" width="30"></a></td>
+												</tr>
+												<tr>
+													<td class="esd-block-text es-m-txt-c" align="center">
+														<h2>Hey there!<br></h2>
+													</td>
+												</tr>
+												<tr>
+													<td class="esd-block-text es-m-txt-c es-p15t" align="center">
+														<p>We received a request to set your email to ${email}. If this is correct, please confirm by clicking the button below. If you don’t know why you got this email, please tell us straight away so we can fix this for you.</p>
+													</td>
+												</tr>
+												<tr>
+													<td class="esd-block-button es-p20t es-p15b es-p10r es-p10l" align="center"><a href=${text}><span class="es-button-border">Confirm Email</span></a></td>
+												</tr>
+											</tbody>
+										</table>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		</td>`
 
-		// await transporter.sendMail({
-		// 	from: process.env.USER,
-		// 	to: email,
-		// 	subject: subject,
-		// 	text: text,
-		// });
-		// console.log("email sent successfully");
 		const accessToken = await oAuth2Client.getAccessToken();
-
 		const transport = nodemailer.createTransport({
 		service: 'gmail',
 		auth: {
@@ -51,11 +73,11 @@ module.exports = async (email, subject, text) => {
 		});
 
 		const mailOptions = {
-		from: 'Test <bepper777@gmail.com>',
+		from: `${subject} <bepper777@gmail.com>`,
 		to: email,
 		subject: subject,
 		text: text,
-		html: `<h1>${text}</h1>`,
+		html: htmlTemplate,
 		};
 
 		const result = await transport.sendMail(mailOptions);

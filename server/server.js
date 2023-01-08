@@ -8,6 +8,7 @@ app.use(cors());
 const connection = require("./db");
 const userRoutes = require("./routes/users");
 const authRoutes = require("./routes/auth");
+const passwordResetRoutes = require("./routes/passwordReset");
 
 // database connection
 connection();
@@ -18,6 +19,7 @@ app.use(express.json());
 // routes
 app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/password-reset", passwordResetRoutes);
 
 //Send API Key
 app.get("/api/api-key", (req, res) => {

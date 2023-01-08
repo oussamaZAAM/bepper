@@ -20,7 +20,7 @@ const EmailVerify = () => {
 				const { data } = await axios.get(url);
 				console.log(data);
 				setValidUrl(true);
-				navigate("/signin");
+				navigate("/login"); 
 			} catch (error) {
 				console.log(error);
 				setValidUrl(false);
@@ -35,7 +35,7 @@ const EmailVerify = () => {
 				<div className={styles.container}>
 					<img src={success} alt="success_img" className={styles.success_img} />
 					<h1>Email verified successfully</h1>
-					<Link to="/signin">
+					<Link to="/login">
 						<button className={styles.green_btn}>Login</button>
 					</Link>
 				</div>

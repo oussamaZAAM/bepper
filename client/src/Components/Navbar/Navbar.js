@@ -123,7 +123,7 @@ function Navbar(props) {
               ))}
             </Box>
             {!user 
-            ? <Link style={{textDecoration: 'none'}} to="/signin"><Button className="signin-nav">
+            ? <Link style={{textDecoration: 'none'}} to="/login"><Button className="signin-nav">
               Sign in
             </Button></Link>
             : <Button className="signin-nav" onClick={handleSignout}>

@@ -9,6 +9,7 @@ import {
 import "./Footer.css"
 import Button from "@mui/material/Button"
 import {FiFacebook, FiTwitter, FiLinkedin, FiGithub, FiInstagram} from 'react-icons/fi'
+import fullLogo from "../../Logos/full logo/green.png";
 
 export function Footer() {
   return (
@@ -17,7 +18,7 @@ export function Footer() {
         <form action=''>
           <MDBRow className='d-flex justify-content-center p-3'>
             <MDBCol size='auto' className='mb-2'>
-              <img alt='full-logo' src='./green.png' className='img-responsive' />
+              <img alt='full-logo' src={fullLogo} className='img-responsive' />
             </MDBCol>
             <MDBCol size='auto' className='mb-2'>
               <p className='pt-2'>
@@ -35,7 +36,7 @@ export function Footer() {
           </MDBRow>
         </form>
         <section className="d-flex align-items-center justify-content-between">
-          <img alt='full-logo' src={require('../../Logos/full logo/green.png')} className='img-responsive' />
+          <img alt='full-logo' src={fullLogo} className='img-responsive' />
           <div className='d-flex align-items-center justify-content-center'>
 
             <div className="border-hover"><a href="#" className="cool-link text-dark mx-2">Contact Us</a></div>
