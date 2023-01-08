@@ -34,10 +34,10 @@ const Login = () => {
 
 	return (
 		<div className={styles.login_container}>
-			<div className={styles.login_form_container}>
-				<div className={styles.left}>
+			<div className={'m-3 row '+styles.login_form_container}>
+				<div className={'col-12 col-md-8 '+styles.left}>
 					<form className={styles.form_container} onSubmit={handleSubmit}>
-						<h1>Login to Your Account</h1>
+						<h1 className="text-center">Login to Your Account</h1>
 						<input
 							type="email"
 							placeholder="Email"
@@ -65,7 +65,7 @@ const Login = () => {
 						</button>
 					</form>
 				</div>
-				<div className={styles.right}>
+				<div className={'col-12 col-md-4 '+styles.right}>
 					<h1>New Here ?</h1>
 					<Link to="/signup">
 						<button type="button" className={styles.white_btn}>

@@ -45,7 +45,7 @@ module.exports = async (email, subject, text) => {
 													</td>
 												</tr>
 												<tr>
-													<td class="esd-block-button es-p20t es-p15b es-p10r es-p10l" align="center"><a href=${text}><span class="es-button-border">Confirm Email</span></a></td>
+													<td class="esd-block-button es-p20t es-p15b es-p10r es-p10l" align="center"><a href=${text}><span class="es-button-border">${subject === 'Verify Email' ? 'Confirm Email' : 'Change Password'}</span></a></td>
 												</tr>
 											</tbody>
 										</table>

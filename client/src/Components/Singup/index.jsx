@@ -37,8 +37,8 @@ const Signup = () => {
 
 	return (
 		<div className={styles.signup_container}>
-			<div className={styles.signup_form_container}>
-				<div className={styles.left}>
+			<div className={'m-3 row '+styles.signup_form_container}>
+				<div className={'col-12 col-md-4 '+styles.left}>
 					<h1>Welcome Back</h1>
 					<Link to="/login">
 						<button type="button" className={styles.white_btn}>
@@ -46,7 +46,7 @@ const Signup = () => {
 						</button>
 					</Link>
 				</div>
-				<div className={styles.right}>
+				<div className={'col-12 col-md-8 '+styles.right}>
 					<form className={styles.form_container} onSubmit={handleSubmit}>
 						<h1>Create Account</h1>
 						<input
