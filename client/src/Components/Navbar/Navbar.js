@@ -30,7 +30,6 @@ function RefreshPage(){
 
 function Navbar(props) {
   const [cookie, setCookie, removeCookie] = useCookies("token");
-  const user = cookie.token;
   
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -122,7 +121,7 @@ function Navbar(props) {
                 </Button>
               ))}
             </Box>
-            {!user 
+            {!props.user 
             ? <Link style={{textDecoration: 'none'}} to="/login"><Button className="signin-nav">
               Sign in
             </Button></Link>
