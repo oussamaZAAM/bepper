@@ -85,6 +85,10 @@ const Signup = () => {
 							required
 							className={styles.input}
 						/>
+						<div className="w-100 d-flex align-items-center justify-items-start">
+							<input className="mx-3" type="checkbox" id="privacy-policy" required />
+							<label for="privacy-policy">I have read and accept the <a href="#">privacy policy</a></label>
+						</div>
 						{error && <div className={styles.error_msg}>{error}</div>}
 						{msg && <div className={styles.success_msg}>{msg}</div>}
 						<button type="submit" className={styles.green_btn}>
