@@ -1,0 +1,54 @@
+.dashboard{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.avatar{
+    border: solid 1px black;
+}
+.avatar-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(93, 175, 47, 0.1);
+    width: 100%;
+    padding: 12vh 0 2vh 0;
+}
+.settings{
+    width: 100%;
+}
+.settings-swapper{
+    background-color: black;
+}
+.settings-parameters{
+    background: rgba(93, 175, 47, 0.75);
+    padding: 10px 0;
+    transition: background-color 2s ease-out 10ms
+}
+.settings-parameters:hover{
+    background: rgba(93, 175, 47, 1);
+    padding: 10px 0;
+    cursor: pointer;
+}
+.settings-labels{
+    font-family: 'Comfortaa';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 27px;
+    text-align: center;
+    color: #000000;
+}
+.account-overview{
+
+}
+.overview-profile{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+}
+.overview-profile h3{
+    margin: 10px;
+}

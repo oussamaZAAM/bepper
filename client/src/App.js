@@ -12,6 +12,7 @@ import EmailVerify from "./Components/EmailVerify";
 import ForgotPassword from './Components/ForgotPassword';
 import PasswordReset from "./Components/PasswordReset";
 import { useCookies } from 'react-cookie';
+import Test from './Components/Test/Test';
 
 function App() {
   const [cookie, setCookie, removeCookie] = useCookies("token");
@@ -23,6 +24,7 @@ function App() {
       {/* <Navbar2 /> */}
       <Routes>
           <Route path='/' element={<Main />}/>
+          <Route path='/test' element={<Test />}/>
           <Route path='/main' element={<Main />}/>
           <Route path='/diets' element={<Diets />}/>
           <Route path="/signup" element={!user ? <Signup /> : <Navigate to='/' />} />
