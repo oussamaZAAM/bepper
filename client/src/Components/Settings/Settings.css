@@ -93,18 +93,96 @@ hr{
     background-color: rgba(127, 127, 127, 0.4) !important;
 }
 
-.submit-btn{
+/* Profile Submit Button */
+.profile-btn{
     color: black !important;
     font-family: 'Akaya Kanadaka', cursive;
     background-color: rgba(93,175,47, 0.5) !important;
-    width: 100px !important;
+    width: 200px !important;
 }
-.submit-btn:hover{
+.profile-btn:hover{
     font-weight: 600;
     background-color: rgba(93,175,47, 1) !important;
-    width: 120px !important;
+    width: 220px !important;
     height: 40px !important;
 }
-.submit-wrapper{
-    width: 120px;
+.profile-wrapper{
+    width: 220px;
+}
+/* Password Submit Button */
+.password-btn{
+    color: black !important;
+    font-family: 'Akaya Kanadaka', cursive;
+    background-color: rgba(93,175,47, 0.5) !important;
+    width: 300px !important;
+}
+.password-btn:hover{
+    font-weight: 600;
+    background-color: rgba(93,175,47, 1) !important;
+    width: 320px !important;
+    height: 40px !important;
+}
+.password-wrapper{
+    width: 320px;
+}
+
+@media only screen and (max-width: 500px) {
+    .settings-buttons{
+        margin: 20px 0;
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+    }
+    .cancel-btn{
+        margin: 0 !important;
+    }
+}
+@media only screen and (max-width: 350px) {
+    .password-wrapper{
+        width: 220px;
+    }
+    .password-btn{
+        color: black !important;
+        font-family: 'Akaya Kanadaka', cursive;
+        background-color: rgba(93,175,47, 0.5) !important;
+        width: 200px !important;
+    }
+    .password-btn:hover{
+        font-size: small;
+        font-weight: 600;
+        background-color: rgba(93,175,47, 1) !important;
+        width: 220px !important;
+        height: 40px !important;
+    }
+}
+
+/* MUI Fix Style */
+
+/* Date and Region Outline */
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline{
+    /* color: rgba(93,175,47,255) !important;
+    border: 2px solid rgba(93,175,47,255) !important; */
+}
+.css-o9k5xi-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border: 2px solid rgba(93,175,47,255) !important;
+}
+.css-154xyx0-MuiInputBase-root-MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline {
+    border: 2px solid rgba(93,175,47,255) !important;
+}
+/* Textfield Label Color */
+.css-1sumxir-MuiFormLabel-root-MuiInputLabel-root.Mui-focused {
+    color: rgba(93,175,47,255) !important;
+}
+/* Password Label Color */
+.css-o943dk-MuiFormLabel-root-MuiInputLabel-root.Mui-focused{
+    color: rgba(93,175,47,255) !important;
+}
+/* Textfield Underline color */
+.css-15mnzpi-MuiInputBase-root-MuiFilledInput-root:after{
+    border-bottom: 2px solid rgba(93,175,47,255) !important;
+}
+/* Password Underline color */
+.css-k5rjo5-MuiInputBase-root-MuiFilledInput-root:after{
+    border-bottom: 2px solid rgba(93,175,47,255) !important;
 }
