@@ -5,10 +5,11 @@ import Stack from '@mui/material/Stack';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { inputLabelClasses } from "@mui/material/InputLabel";
 
 import countries from './Countries';
 import dayjs from 'dayjs';
-import './Settings.css'
+import './Settings.css';
 
 const ModifyProfile = () => {
     const [gender, setGender] = useState('');
@@ -42,6 +43,16 @@ const ModifyProfile = () => {
                     type='text'
                     label="Username"
                     variant="filled"
+                    InputLabelProps={{
+                        sx: {
+                          // set the color of the label when not shrinked
+                        //   color: "rgba(93,175,47,255)",
+                          [`&.${inputLabelClasses.shrink}`]: {
+                            // set the color of the label when shrinked (usually when the TextField is focused)
+                            color: "rgba(93,175,47,255)"
+                          }
+                        }
+                      }}
                 />
                 <TextField
                     className='w-100 my-3'
@@ -49,6 +60,16 @@ const ModifyProfile = () => {
                     type='email'
                     label="Email"
                     variant="filled"
+                    InputLabelProps={{
+                        sx: {
+                          // set the color of the label when not shrinked
+                        //   color: "rgba(93,175,47,255)",
+                          [`&.${inputLabelClasses.shrink}`]: {
+                            // set the color of the label when shrinked (usually when the TextField is focused)
+                            color: "rgba(93,175,47,255)"
+                          }
+                        }
+                      }}
                 />
                 <FormControl className='my-3' variant="filled" fullWidth>
                     <InputLabel id="demo-simple-select-filled-label">Gender</InputLabel>
@@ -58,6 +79,9 @@ const ModifyProfile = () => {
                         value={gender}
                         label="Gender"
                         onChange={handleChangeGender}
+                        sx={{
+                            ':after': { borderBottomColor: 'rgba(93,175,47,255)' },
+                          }}
                     >
                     <MenuItem value={'male'}>Male</MenuItem>
                     <MenuItem value={'female'}>Female</MenuItem>
@@ -113,8 +137,8 @@ const ModifyProfile = () => {
                 </div>
                 <div className="settings-buttons flex-center">
                     <Button className='cancel-btn'>Cancel</Button>
-                    <div className='flex-center submit-wrapper'>
-                        <Button className='submit-btn' type='submit'>Submit</Button>
+                    <div className='flex-center profile-wrapper'>
+                        <Button className='profile-btn' type='submit'>Save Profile</Button>
                     </div>
                 </div>
             </Box>
