@@ -1,0 +1,110 @@
+.dashboard{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.avatar{
+    border: solid 1px black;
+}
+.avatar-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(93, 175, 47, 0.1);
+    width: 100%;
+    padding: 12vh 0 2vh 0;
+}
+.settings{
+    width: 100%;
+}
+.settings-swapper{
+    background-color: black;
+    width: 100%;
+    margin: 0 !important;
+}
+.settings-parameters{
+    background: rgba(93, 175, 47, 0.75);
+    padding: 10px 0;
+    transition: background-color 500ms ease-out 100ms;
+}
+.settings-parameters:hover{
+    background: rgba(93, 175, 47, 1);
+    padding: 10px 0;
+    cursor: pointer;
+}
+.settings-labels{
+    font-family: 'Comfortaa';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 27px;
+    text-align: center;
+    color: #000000;
+}
+.account-overview{
+    width: 100%;
+    margin: 0 !important;
+}
+.overview-profile{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    width: 100%;
+}
+.overview-profile h3{
+    margin: 10px;
+}
+.overview-settings{
+    width: 100%;
+    font-family: 'Jura', sans-serif;
+    margin: 5px 10px;
+    word-break: break-all;
+    font-size: 18px;
+}
+.overview-settings b{
+    margin-left: 5px;
+}
+.overview-settings small{
+    margin-left: 5px;
+}
+hr{
+    width: 100%;
+}
+.modify-profile{
+    width: 100%;
+    margin: 0 !important;
+}
+.modify-textfield{
+    width: 100%;
+}
+.settings-buttons{
+    width: 100%;
+    justify-content: end;
+    height: 50px;
+}
+.cancel-btn{
+    color: gray !important;
+    margin-right: 20px !important;
+    width: 100px;
+}
+.cancel-btn:hover{
+    font-weight: 600;
+    background-color: rgba(127, 127, 127, 0.4) !important;
+}
+
+.submit-btn{
+    color: black !important;
+    font-family: 'Akaya Kanadaka', cursive;
+    background-color: rgba(93,175,47, 0.5) !important;
+    width: 100px !important;
+}
+.submit-btn:hover{
+    font-weight: 600;
+    background-color: rgba(93,175,47, 1) !important;
+    width: 120px !important;
+    height: 40px !important;
+}
+.submit-wrapper{
+    width: 120px;
+}
