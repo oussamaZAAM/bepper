@@ -18,9 +18,8 @@ const EmailVerify = () => {
 			try {
 				const url = `${REACT_APP_BASE_URL}/api/users/${param.id}/verify/${param.token}`;
 				const { data } = await axios.get(url);
-				console.log(data);
 				setValidUrl(true);
-				navigate("/login"); 
+				navigate("/completelogin"); 
 			} catch (error) {
 				console.log(error);
 				setValidUrl(false);

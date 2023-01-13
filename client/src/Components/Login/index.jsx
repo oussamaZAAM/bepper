@@ -27,6 +27,7 @@ const Login = () => {
 			const url = REACT_APP_BASE_URL+"/api/auth";
 			const { data: res } = await axios.post(url, data);
 			setCookie("token", res.data);
+			setCookie("user", res.user);
 			window.location = "/";
 		} catch (error) {
 			if (

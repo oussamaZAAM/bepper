@@ -13,25 +13,27 @@ import ForgotPassword from './Components/ForgotPassword';
 import PasswordReset from "./Components/PasswordReset";
 import { useCookies } from 'react-cookie';
 import Test from './Components/Test/Test';
+import CompleteLogin from './Components/EmailVerify/CompleteLogin';
 
 function App() {
   const [cookie, setCookie, removeCookie] = useCookies("token");
-  const user = cookie.token;
+  const token = cookie.token;
 
   return (
     <BrowserRouter>
-      <Navbar user={user}/>
+      <Navbar user={token}/>
       {/* <Navbar2 /> */}
       <Routes>
           <Route path='/' element={<Main />}/>
           <Route path='/test' element={<Test />}/>
           <Route path='/main' element={<Main />}/>
           <Route path='/diets' element={<Diets />}/>
-          <Route path="/signup" element={!user ? <Signup /> : <Navigate to='/' />} />
-          <Route path="/login" element={!user ? <Login /> : <Navigate to='/' />} />
-          <Route path="/users/:id/verify/:token" element={!user ? <EmailVerify /> : <Navigate to='/' />} />
-          <Route path="/forgot-password" element={!user ? <ForgotPassword /> : <Navigate to='/' />} />
-          <Route path="/password-reset/:id/:token" element={!user ? <PasswordReset /> : <Navigate to='/' />} />
+          <Route path="/completelogin" element={token ? <CompleteLogin /> : <Navigate to='/' />} />
+          <Route path="/signup" element={!token ? <Signup /> : <Navigate to='/' />} />
+          <Route path="/login" element={!token ? <Login /> : <Navigate to='/' />} />
+          <Route path="/users/:id/verify/:token" element={!token ? <EmailVerify /> : <Navigate to='/' />} />
+          <Route path="/forgot-password" element={!token ? <ForgotPassword /> : <Navigate to='/' />} />
+          <Route path="/password-reset/:id/:token" element={!token ? <PasswordReset /> : <Navigate to='/' />} />
           <Route path='*' element={<Navigate to='/' />} />
       </Routes>
       {/* <Screen /> */}
