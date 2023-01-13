@@ -12,7 +12,15 @@
     align-items: center;
     justify-content: center;
 }
+
 .signin-nav{
+    padding-inline: 30px !important;
+    font-weight: 700 !important;
+    color: rgba(93,175,47,255) !important;
+    background-color: white !important;
+    margin-inline: 2.5px !important;
+}
+.signout-nav{
     padding-inline: 30px !important;
     font-weight: 700 !important;
     color: rgba(93,175,47,255) !important;
@@ -25,6 +33,30 @@
   -webkit-text-stroke-width: 1px;
   border: 2.5px solid black;
   margin-inline: 0 !important;
+}
+.signout-nav:hover{
+  -webkit-text-fill-color: red;
+  -webkit-text-stroke-color: black;
+  -webkit-text-stroke-width: 1px;
+  border: 2.5px solid black;
+  margin-inline: 0 !important;
+}
+.navbar-menu{
+    padding: 0 !important;
+    display: flex;
+    justify-content: center !important;
+}
+.navbar-menu:hover{
+    background-color: rgba(93,175,47,0.04) !important;
+}
+.navbar-menuitem{
+    -webkit-text-fill-color: rgba(93,175,47,255);
+    -webkit-text-stroke-color: black;
+    -webkit-text-stroke-width: 0.25px;
+    text-decoration: none;
+}
+.navbar-menuitem:hover{
+    background-color: transparent !important;
 }
 .bepper-text:hover{
     /* color: rgba(93,175,47,255); */
@@ -39,10 +71,19 @@
   -webkit-text-stroke-width: 0.5px; 
 }
 
+.profile-icon{
+    background-color: rgba(255,255,255,0.5);
+}
+
 
 @media only screen and (min-width: 600px) {
     .nav-grid{
         justify-content: space-between;
+    }
+}
+@media only screen and (max-width: 686px) {
+    .signin-nav{
+        display: none !important;
     }
 }
 @media only screen and (max-width: 490px) {

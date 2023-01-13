@@ -17,6 +17,7 @@ import Button from '@mui/material/Button';
 import "./Navbar.css"
 import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import { Avatar, Menu, MenuItem } from '@mui/material';
 
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];
@@ -44,6 +45,15 @@ function Navbar(props) {
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
+  };
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
   };
 
   const drawer = (
@@ -122,12 +132,55 @@ function Navbar(props) {
               ))}
             </Box>
             {!props.user 
-            ? <Link style={{textDecoration: 'none'}} to="/login"><Button className="signin-nav">
-              Sign in
-            </Button></Link>
-            : <Button className="signin-nav" onClick={handleSignout}>
-            Sign out
-          </Button>}
+              && <Link style={{textDecoration: 'none'}} to="/login"><Button className="signin-nav">
+                Sign in
+              </Button></Link>}
+
+            {props.user &&
+            <>
+              <Button
+                id="basic-button"
+                aria-controls={open ? 'basic-menu' : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? 'true' : undefined}
+                onClick={handleClick}
+              >
+                <Avatar
+                    alt="Username"
+                    className="profile-icon"
+                    src={require('../../Logos/border logo/border-red.png')}
+                    sx={{ width: 50, height: 50 }}
+                />
+              </Button>
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{
+                  'aria-labelledby': 'basic-button',
+                }}
+              >
+                <MenuItem className='navbar-menu' onClick={handleClose}>
+                  <Button className="navbar-menuitem">
+                    Profile
+                  </Button>
+                </MenuItem>
+                <Link className='text-decoration-none' to={'/test'}>
+                  <MenuItem className='navbar-menu' onClick={handleClose}>
+                    <Button className="navbar-menuitem">
+                      Settings
+                    </Button>
+                  </MenuItem>
+                </Link>
+                <Divider sx={{ my: 0.5 }} />
+                <MenuItem className='bg-white' onClick={handleClose}>
+                  <Button className="signout-nav" onClick={handleSignout}>
+                    Sign out
+                  </Button>
+                </MenuItem>
+              </Menu>
+            </>}
           </div>
         </Toolbar>
       </AppBar>
