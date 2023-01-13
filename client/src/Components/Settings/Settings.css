@@ -23,10 +23,16 @@
     width: 100%;
     margin: 0 !important;
 }
+.settings-swapper-wrapper{
+    background: white;
+    margin: 0 !important;
+    padding: 0 !important;
+}
 .settings-parameters{
     background: rgba(93, 175, 47, 0.75);
     padding: 10px 0;
     transition: background-color 500ms ease-out 100ms;
+    height: 100%;
 }
 .settings-parameters:hover{
     background: rgba(93, 175, 47, 1);

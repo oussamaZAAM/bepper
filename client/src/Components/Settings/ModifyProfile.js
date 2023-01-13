@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate } from "react-router-dom";
 
 import { Autocomplete, Box, Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import Stack from '@mui/material/Stack';
@@ -9,73 +10,106 @@ import { inputLabelClasses } from "@mui/material/InputLabel";
 
 import countries from './Countries';
 import dayjs from 'dayjs';
-import './Settings.css';
+// import './Settings.css';
 
-const ModifyProfile = () => {
+const ModifyProfile = (props) => {
+    const [infos, setInfos] = useState({username: '', email: (props.completing ? 'filler' : ''), gender: '', date: dayjs(''), region: ''});
     const [gender, setGender] = useState('');
+    const [date, setDate] = useState(dayjs(''));
+    const [region, setRegion] = useState();
 
+    //Check Form Validity even though using preventDefault
+    // document.getElementByCl('myForm').checkValidity();
+
+    const handleChange = (event) => {
+        setInfos({...infos, [event.target.name]: event.target.value});
+    }
+    
     const handleChangeGender = (event) => {
         setGender(event.target.value);
+        setInfos({...infos, gender: event.target.value});
+    };
+    
+    const handleChangeDate = (newValue) => {
+        setDate(newValue);
+        setInfos({...infos, date: newValue});
     };
 
-    const [value, setValue] = React.useState(dayjs('2014-08-18T21:11:54'));
-
-    const handleChange = (newValue) => {
-        setValue(newValue);
+    const handleChangeRegion = (event, newValue) => {
+        setRegion(newValue);
+        setInfos({...infos, region: newValue});
     };
+
+    const today = dayjs(new Date());
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        var birthYear = dayjs(infos.date).get('year');
+        if (today.diff(dayjs(infos.date), 'year') >= 18){
+            if (birthYear >= 1900 && Object.keys(infos).every(x=>infos[x] !== '') && Object.keys(infos).every(x=>infos[x] !== null)){
+                //Send data to Parent
+                props.sendData(infos)
+            }
+        } else {
+            alert('You should be over 18 to use this application!');
+        }
+    }
   return (
     /* Modify Profile */
     <div className='modify-profile row'>
         <div className='col-0 col-md-1 col-lg-2 col-xl-3'></div>
         <div className='flex-column-css col-12 col-md-10 col-lg-8 col-xl-6'>
-            <h3 style={{fontSize: '36px'}} className='title'>Modify Profile</h3>
+            <h3 style={{fontSize: '36px'}} className='title'>{props.completing ? 'Complete Profile' : 'Modify Profile'}</h3>
             <Box
-                className='flex-column-css w-100 px-3'
+                className='myForm flex-column-css w-100 px-3'
                 component="form"
                 sx={{
                     '& .MuiTextField-root': { m: 1, width: '25ch' },
                 }}
                 autoComplete="off"
+                onSubmit={handleSubmit}
             >
                 <TextField
                     className='w-100 my-3'
                     required
+                    onChange={handleChange}
+                    value={infos.username}
+                    name='username'
                     type='text'
                     label="Username"
                     variant="filled"
                     InputLabelProps={{
                         sx: {
-                          // set the color of the label when not shrinked
-                        //   color: "rgba(93,175,47,255)",
                           [`&.${inputLabelClasses.shrink}`]: {
-                            // set the color of the label when shrinked (usually when the TextField is focused)
                             color: "rgba(93,175,47,255)"
                           }
                         }
                       }}
                 />
+                {!props.completing && 
                 <TextField
                     className='w-100 my-3'
                     required
+                    onChange={handleChange}
+                    value={infos.email}
+                    name='email'
                     type='email'
                     label="Email"
                     variant="filled"
                     InputLabelProps={{
                         sx: {
-                          // set the color of the label when not shrinked
-                        //   color: "rgba(93,175,47,255)",
                           [`&.${inputLabelClasses.shrink}`]: {
-                            // set the color of the label when shrinked (usually when the TextField is focused)
                             color: "rgba(93,175,47,255)"
                           }
                         }
                       }}
-                />
+                />}
                 <FormControl className='my-3' variant="filled" fullWidth>
                     <InputLabel id="demo-simple-select-filled-label">Gender</InputLabel>
                     <Select
                         labelId="demo-simple-select-filled-label"
                         id="demo-simple-select-filled"
+                        required
                         value={gender}
                         label="Gender"
                         onChange={handleChangeGender}
@@ -96,8 +130,8 @@ const ModifyProfile = () => {
                                 <DesktopDatePicker
                                 label="Date of Birth"
                                 inputFormat="MM/DD/YYYY"
-                                value={value}
-                                onChange={handleChange}
+                                value={date}
+                                onChange={handleChangeDate}
                                 renderInput={(params) => <TextField {...params} />}
                                 />
                             </Stack>
@@ -108,6 +142,7 @@ const ModifyProfile = () => {
                             id="country-select-demo"
                             sx={{ width: 300 }}
                             options={countries}
+                            onChange={handleChangeRegion}
                             autoHighlight
                             getOptionLabel={(option) => option.label}
                             renderOption={(props, option) => (
@@ -136,9 +171,9 @@ const ModifyProfile = () => {
                     </div>
                 </div>
                 <div className="settings-buttons flex-center">
-                    <Button className='cancel-btn'>Cancel</Button>
+                    {!props.completing && <Button className='cancel-btn'>Cancel</Button>}
                     <div className='flex-center profile-wrapper'>
-                        <Button className='profile-btn' type='submit'>Save Profile</Button>
+                        <Button  className='profile-btn' type='submit'>Save Profile</Button>
                     </div>
                 </div>
             </Box>
