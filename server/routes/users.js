@@ -5,11 +5,20 @@ const crypto = require("crypto");
 const sendEmail = require("../utils/sendEmail");
 const bcrypt = require("bcrypt");
 
+router.get("/:id", async (req, res) => {
+	try{
+		const user = await User.findOne({_id: req.params.id});
+		res.status(200).send(user);
+	} catch(err){
+		res.status(500).send({ message: "Internal Server Error" });
+	}
+})
+
 router.post("/", async (req, res) => {
 	try {
-		// const { error } = validate(req.body);
-		// if (error)
-		// 	return res.status(400).send({ message: error.details[0].message });
+		const { error } = validate(req.body);
+		if (error)
+			return res.status(400).send({ message: error.details[0].message });
 
 		let user = await User.findOne({ email: req.body.email });
 		if (user)
@@ -50,13 +59,13 @@ router.post("/", async (req, res) => {
 router.get("/:id/verify/:token/", async (req, res) => {
 	try {
 		const user = await User.findOne({ _id: req.params.id });
-		if (!user) return res.status(400).send({ message: "Invalid link" });
+		if (!user) return res.status(400).send({ message: "Invalid link no User" });
 
 		const token = await Token.findOne({
 			userId: user._id,
 			token: req.params.token,
 		});
-		if (!token) return res.status(400).send({ message: "Invalid link" });
+		if (!token) return res.status(400).send({ message: "Invalid link no Token" });
 		
 		await User.updateOne({ _id: user._id},{ $set: { verified: true } });
 		await token.remove();
@@ -68,7 +77,6 @@ router.get("/:id/verify/:token/", async (req, res) => {
 });
 
 router.put("/:id/completelogin", async (req, res) => {
-	console.log(req.body.date)
 	try {
 		const user = await User.findOne({ _id: req.params.id});
 		await User.updateOne({ _id: user._id}, { $set: { 

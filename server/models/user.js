@@ -13,6 +13,7 @@ const userSchema = new mongoose.Schema({
 	gender: { type: String, default: '' },
 	birthday: { type: Date, default: '' },
 	region: { type: Object, default: '' },
+	firstTime: { type: Boolean, default: true },
 });
 
 userSchema.methods.generateAuthToken = function () {

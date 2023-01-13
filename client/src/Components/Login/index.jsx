@@ -7,7 +7,6 @@ import { FcGoogle } from "react-icons/fc";
 import { GoogleLogin } from '@react-oauth/google';
 
 const Login = () => {
-	const clientId = '848897856173-th16ujaqdvvlhteviihekoars357qfah.apps.googleusercontent.com';
 	const [cookie, setCookie, removeCookie] = useCookies("token");
     const { REACT_APP_BASE_URL } = process.env;
 	const [data, setData] = useState({ email: "", password: "" });
@@ -28,7 +27,7 @@ const Login = () => {
 			const { data: res } = await axios.post(url, data);
 			setCookie("token", res.data);
 			setCookie("user", res.user);
-			window.location = "/";
+			res.firstTime ? window.location = "/completelogin" : window.location = "/";
 		} catch (error) {
 			if (
 				error.response &&

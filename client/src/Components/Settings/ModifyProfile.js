@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from "react-router-dom";
 
 import { Autocomplete, Box, Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
@@ -10,13 +10,22 @@ import { inputLabelClasses } from "@mui/material/InputLabel";
 
 import countries from './Countries';
 import dayjs from 'dayjs';
+import axios from 'axios';
+import { useCookies } from 'react-cookie';
 // import './Settings.css';
 
 const ModifyProfile = (props) => {
+    const { REACT_APP_BASE_URL } = process.env;
+
     const [infos, setInfos] = useState({username: '', email: (props.completing ? 'filler' : ''), gender: '', date: dayjs(''), region: ''});
     const [gender, setGender] = useState('');
     const [date, setDate] = useState(dayjs(''));
     const [region, setRegion] = useState();
+
+    //Fetch User's Data
+    const [cookie, setCookie, removeCookie] = useCookies("token");
+    const userId = cookie.user;
+    const [user, setUser] = useState();
 
     //Check Form Validity even though using preventDefault
     // document.getElementByCl('myForm').checkValidity();
@@ -54,6 +63,15 @@ const ModifyProfile = (props) => {
             alert('You should be over 18 to use this application!');
         }
     }
+
+    useEffect(() =>{
+      const fetchUser = async () => {
+        const res = await axios.get(REACT_APP_BASE_URL+'/api/users/'+userId);
+        setUser(res.data);
+      }
+      fetchUser(userId);
+    }, []);
+
   return (
     /* Modify Profile */
     <div className='modify-profile row'>
@@ -73,7 +91,7 @@ const ModifyProfile = (props) => {
                     className='w-100 my-3'
                     required
                     onChange={handleChange}
-                    value={infos.username}
+                    value={user ? user.username : infos.username}
                     name='username'
                     type='text'
                     label="Username"

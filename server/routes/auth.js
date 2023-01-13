@@ -8,7 +8,7 @@ const Joi = require("joi");
 
 router.post("/", async (req, res) => {
 	try {
-		const { error } = validate(req.body);
+		const { error } = validate(req.body); 
 		if (error)
 			return res.status(400).send({ message: error.details[0].message });
 
@@ -40,7 +40,8 @@ router.post("/", async (req, res) => {
 		}
 
 		const token = user.generateAuthToken();
-		res.status(200).send({ data: token, user: user._id, message: "logged in successfully" });
+		res.status(200).send({ data: token, user: user._id, firstTime: user.firstTime, message: "logged in successfully" });
+		await User.updateOne({ _id: user._id},{ $set: { firstTime: false } });
 	} catch (error) {
 		res.status(500).send({ message: "Internal Server Error" });
 	}
