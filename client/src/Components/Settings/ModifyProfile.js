@@ -59,6 +59,7 @@ const ModifyProfile = (props) => {
         setInfos({
             ...infos, 
             username: res.data.username,
+            email: res.data.email,
             gender: res.data.gender,
             birthday: res.data.birthday,
             region: res.data.region,
@@ -143,7 +144,7 @@ const ModifyProfile = (props) => {
                             <Stack spacing={0}>
                                 <DesktopDatePicker
                                 label="Date of Birth"
-                                inputFormat="MM/DD/YYYY"
+                                inputFormat="DD/MM/YYYY"
                                 value={infos.birthday}
                                 onChange={handleChangeDate}
                                 renderInput={(params) => <TextField {...params} />}

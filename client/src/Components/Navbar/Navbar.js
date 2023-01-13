@@ -166,7 +166,7 @@ function Navbar(props) {
                     Profile
                   </Button>
                 </MenuItem>
-                <Link className='text-decoration-none' to={'/test'}>
+                <Link className='text-decoration-none' to={'/settings'}>
                   <MenuItem className='navbar-menu' onClick={handleClose}>
                     <Button className="navbar-menuitem">
                       Settings

@@ -4,7 +4,7 @@ import Avatar from '@mui/material/Avatar';
 import { Badge } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-import './Test.css'
+import './Settings.css'
 import AccountOverview from '../Settings/AccountOverview';
 import ModifyProfile from '../Settings/ModifyProfile';
 import ChangePassword from '../Settings/ChangePassword';
@@ -18,7 +18,7 @@ const SmallAvatar = styled(Avatar)(({ theme }) => ({
     border: `2px solid ${theme.palette.background.paper}`,
   }));
 
-const Test = () => {
+const Settings = () => {
     const [swapper, setSwapper] = useState('overview');
   return (
     <div className='dashboard'>
@@ -90,5 +90,5 @@ const Test = () => {
   )
 }
 
-export default Test
+export default Settings
 

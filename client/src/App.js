@@ -14,6 +14,7 @@ import PasswordReset from "./Components/PasswordReset";
 import { useCookies } from 'react-cookie';
 import Test from './Components/Test/Test';
 import CompleteLogin from './Components/EmailVerify/CompleteLogin';
+import Settings from './Components/Settings/Settings';
 
 function App() {
   const [cookie, setCookie, removeCookie] = useCookies("token");
@@ -28,6 +29,7 @@ function App() {
           <Route path='/test' element={<Test />}/>
           <Route path='/main' element={<Main />}/>
           <Route path='/diets' element={<Diets />}/>
+          <Route path="/settings" element={token ? <Settings /> : <Navigate to='/' />} />
           <Route path="/completelogin" element={token ? <CompleteLogin /> : <Navigate to='/' />} />
           <Route path="/signup" element={!token ? <Signup /> : <Navigate to='/' />} />
           <Route path="/login" element={!token ? <Login /> : <Navigate to='/' />} />
