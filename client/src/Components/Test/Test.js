@@ -1,8 +1,15 @@
-import React from 'react'
-import './Test.css'
+import React, { useState } from 'react'
+
 import Avatar from '@mui/material/Avatar';
-import { Badge } from '@mui/material';
+import { Badge, Box, Button, FilledInput, FormControl, IconButton, InputAdornment, InputLabel } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import Visibility from '@mui/icons-material/Visibility';
+import VisibilityOff from '@mui/icons-material/VisibilityOff';
+
+import './Test.css'
+import AccountOverview from '../Settings/AccountOverview';
+import ModifyProfile from '../Settings/ModifyProfile';
+import ChangePassword from '../Settings/ChangePassword';
 
 const sideBorder = 2;
 const clickedBorder = 4;
@@ -15,6 +22,52 @@ const SmallAvatar = styled(Avatar)(({ theme }) => ({
   }));
 
 const Test = () => {
+    const [swapper, setSwapper] = useState('overview');
+
+    const [current, setCurrent] = useState({
+        password: '',
+        showPassword: false,
+      });
+    const [newOne, setNewOne] = useState({
+        password: '',
+        showPassword: false,
+      });
+    const [verify, setVerify] = useState({
+        password: '',
+        showPassword: false,
+      });
+    
+      const handleChange = (arg, event) => {
+        switch (arg) {
+            case 'current':
+                setCurrent({ ...current, password: event.target.value });
+                break;
+            case 'newOne':
+                setNewOne({ ...newOne, password: event.target.value });
+                break;
+            case 'verify':
+                setVerify({ ...verify, password: event.target.value });
+                break;
+        }
+      };
+    
+      const handleClickShowPassword = (arg) => {
+        switch (arg) {
+            case 'current':
+                setCurrent({...current, showPassword: !current.showPassword});
+                break;
+            case 'newOne':
+                setNewOne({...newOne, showPassword: !newOne.showPassword});
+                break;
+            case 'verify':
+                setVerify({...verify, showPassword: !verify.showPassword});
+                break;
+        }
+      };
+    
+      const handleMouseDownPassword = (event) => {
+        event.preventDefault();
+      };
   return (
     <div className='dashboard'>
         <div className='avatar-container'>
@@ -35,35 +88,55 @@ const Test = () => {
             </Badge>
         </div>
         <div className='settings'>
+            {/* Settings Swapper */}
             <div className='settings-swapper row'>
                 <div className='col-0 col-md-1 col-lg-2 col-xl-3'></div>
-                <div 
-                    className='flex-center settings-parameters col-6 col-md-5 col-lg-4 col-xl-3' 
-                    style={{borderBottom: 'solid '+clickedBorder+'px black', 
-                            borderRight: 'solid '+sideBorder+'px black'}}>
-                    <b className='settings-labels'>Account Overview</b>
-                </div>
-                <div 
-                    className='flex-center settings-parameters col-6 col-md-5 col-lg-4 col-xl-3' 
-                    style={{borderBottom: 'solid '+unClickedBorder+'px black', 
-                            borderLeft: 'solid '+sideBorder+'px black'}}>
-                    <b className='settings-labels'>Change Password</b>
-                </div>
-                <div className='col-0 col-md-1 col-lg-2 col-xl-'></div>
-            </div>
-            <div className='account-overview row'>
-                <div className='col-0 col-md-1 col-lg-2 col-xl-3'></div>
-                <div className='flex-column-css col-12 col-md-10 col-lg-8 col-xl-6'>
-                    <h3 style={{fontSize: '36px'}} className='title'>Account Overview</h3>
-                    <div className='overview-profile'>
-                        <h3 className='title'>Profile</h3>
+                <div className='flex-center col-12 col-md-10 col-lg-8 col-xl-6 row settings-swapper-wrapper'>
+                    <div 
+                        className='flex-center settings-parameters col-4 col-md-4 col-lg-4 col-xl-4'
+                        style={{borderBottom: 'solid '+(swapper==='overview' ? clickedBorder : '0')+'px black', 
+                                borderRight: 'solid '+((swapper==='overview'||'profile') ? sideBorder : '0')+'px black',
+                                backgroundColor: swapper==='overview' && 'rgba(93, 175, 47, 1)'}}
+                                onClick={()=>setSwapper('overview')}
+                                >
+                        <b className='settings-labels'>Account Overview</b>
+                    </div>
+                    <div 
+                        className='flex-center settings-parameters col-4 col-md-4 col-lg-4 col-xl-4'
+                        style={{borderBottom: 'solid '+(swapper==='profile' ? clickedBorder : '0')+'px black', 
+                                borderLeft: 'solid '+((swapper==='overview'||'profile') ? sideBorder : '0')+'px black',
+                                borderRight: 'solid '+((swapper==='profile'||'password') ? sideBorder : '0')+'px black',
+                                backgroundColor: swapper==='profile' && 'rgba(93, 175, 47, 1)'}}
+                                onClick={()=>setSwapper('profile')}
+                                >
+                        <b className='settings-labels'>Modify Profile</b>
+                    </div>
+                    <div 
+                        className='flex-center settings-parameters col-4 col-md-4 col-lg-4 col-xl-4'
+                        style={{borderBottom: 'solid '+(swapper==='password' ? clickedBorder : '0')+'px black', 
+                                borderLeft: 'solid '+((swapper==='profile'||'password') ? sideBorder : '0')+'px black',
+                                backgroundColor: swapper==='password' && 'rgba(93, 175, 47, 1)'}}
+                                onClick={()=>setSwapper('password')}
+                                >
+                        <b className='settings-labels'>Change Password</b>
                     </div>
                 </div>
                 <div className='col-0 col-md-1 col-lg-2 col-xl-3'></div>
             </div>
+
+            {/* Account Overview */}
+            {swapper === 'overview' && <AccountOverview />}
+
+            {/* Modify Profile */}
+            {swapper === 'profile' && <ModifyProfile />}
+
+            {/* Change Password */}
+            {swapper === 'password' && <ChangePassword />}
+
         </div>
     </div>
   )
 }
 
 export default Test
+

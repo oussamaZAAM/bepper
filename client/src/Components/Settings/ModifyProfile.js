@@ -17,44 +17,31 @@ import { useCookies } from 'react-cookie';
 const ModifyProfile = (props) => {
     const { REACT_APP_BASE_URL } = process.env;
 
-    const [infos, setInfos] = useState({username: '', email: (props.completing ? 'filler' : ''), gender: '', date: dayjs(''), region: ''});
-    const [gender, setGender] = useState('');
-    const [date, setDate] = useState(dayjs(''));
-    const [region, setRegion] = useState();
+    const [infos, setInfos] = useState({username: '', email: (props.completing ? 'filler' : ''), gender: '', birthday: dayjs(''), region: ''});
 
-    //Fetch User's Data
+    //Fetch User's Token
     const [cookie, setCookie, removeCookie] = useCookies("token");
     const userId = cookie.user;
-    const [user, setUser] = useState();
 
-    //Check Form Validity even though using preventDefault
-    // document.getElementByCl('myForm').checkValidity();
+
 
     const handleChange = (event) => {
         setInfos({...infos, [event.target.name]: event.target.value});
     }
-    
-    const handleChangeGender = (event) => {
-        setGender(event.target.value);
-        setInfos({...infos, gender: event.target.value});
-    };
-    
     const handleChangeDate = (newValue) => {
-        setDate(newValue);
-        setInfos({...infos, date: newValue});
+        setInfos({...infos, birthday: newValue});
     };
-
     const handleChangeRegion = (event, newValue) => {
-        setRegion(newValue);
         setInfos({...infos, region: newValue});
     };
 
-    const today = dayjs(new Date());
 
+    //Check Infos Validity
+    const today = dayjs(new Date());
     const handleSubmit = (event) => {
         event.preventDefault();
-        var birthYear = dayjs(infos.date).get('year');
-        if (today.diff(dayjs(infos.date), 'year') >= 18){
+        var birthYear = dayjs(infos.birthday).get('year');
+        if (today.diff(dayjs(infos.birthday), 'year') >= 18){
             if (birthYear >= 1900 && Object.keys(infos).every(x=>infos[x] !== '') && Object.keys(infos).every(x=>infos[x] !== null)){
                 //Send data to Parent
                 props.sendData(infos)
@@ -64,10 +51,18 @@ const ModifyProfile = (props) => {
         }
     }
 
+
+    //Fetch User's data
     useEffect(() =>{
       const fetchUser = async () => {
         const res = await axios.get(REACT_APP_BASE_URL+'/api/users/'+userId);
-        setUser(res.data);
+        setInfos({
+            ...infos, 
+            username: res.data.username,
+            gender: res.data.gender,
+            birthday: res.data.birthday,
+            region: res.data.region,
+        })
       }
       fetchUser(userId);
     }, []);
@@ -91,7 +86,7 @@ const ModifyProfile = (props) => {
                     className='w-100 my-3'
                     required
                     onChange={handleChange}
-                    value={user ? user.username : infos.username}
+                    value={infos.username}
                     name='username'
                     type='text'
                     label="Username"
@@ -128,9 +123,10 @@ const ModifyProfile = (props) => {
                         labelId="demo-simple-select-filled-label"
                         id="demo-simple-select-filled"
                         required
-                        value={gender}
+                        value={infos.gender}
+                        name='gender'
                         label="Gender"
-                        onChange={handleChangeGender}
+                        onChange={handleChange}
                         sx={{
                             ':after': { borderBottomColor: 'rgba(93,175,47,255)' },
                           }}
@@ -148,7 +144,7 @@ const ModifyProfile = (props) => {
                                 <DesktopDatePicker
                                 label="Date of Birth"
                                 inputFormat="MM/DD/YYYY"
-                                value={date}
+                                value={infos.birthday}
                                 onChange={handleChangeDate}
                                 renderInput={(params) => <TextField {...params} />}
                                 />
@@ -161,6 +157,7 @@ const ModifyProfile = (props) => {
                             sx={{ width: 300 }}
                             options={countries}
                             onChange={handleChangeRegion}
+                            value={infos.region}
                             autoHighlight
                             getOptionLabel={(option) => option.label}
                             renderOption={(props, option) => (
