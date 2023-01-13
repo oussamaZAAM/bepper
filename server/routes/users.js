@@ -7,9 +7,9 @@ const bcrypt = require("bcrypt");
 
 router.post("/", async (req, res) => {
 	try {
-		const { error } = validate(req.body);
-		if (error)
-			return res.status(400).send({ message: error.details[0].message });
+		// const { error } = validate(req.body);
+		// if (error)
+		// 	return res.status(400).send({ message: error.details[0].message });
 
 		let user = await User.findOne({ email: req.body.email });
 		if (user)
@@ -20,7 +20,16 @@ router.post("/", async (req, res) => {
 		const salt = await bcrypt.genSalt(Number(process.env.SALT));
 		const hashPassword = await bcrypt.hash(req.body.password, salt);
 
-		user = await new User({ ...req.body, password: hashPassword }).save();
+		user = await new User({ 
+			firstName: req.body.firstName,
+			lastName: req.body.lastName,
+			email: req.body.email,
+			password: hashPassword,
+			username: req.body.username,
+			gender: req.body.gender,
+			birthday: req.body.birthday,
+			region: req.body.region,
+		}).save();
 
 		const token = await new Token({
 			userId: user._id,
@@ -57,5 +66,22 @@ router.get("/:id/verify/:token/", async (req, res) => {
 		res.status(500).send({ message: "Internal Server Error" });
 	}
 });
+
+router.put("/:id/completelogin", async (req, res) => {
+	console.log(req.body.date)
+	try {
+		const user = await User.findOne({ _id: req.params.id});
+		await User.updateOne({ _id: user._id}, { $set: { 
+			username: req.body.username, 
+			gender: req.body.gender,
+			birthday: req.body.date,
+			region: req.body.region
+		 }});
+
+		 res.status(200).send({ message: "Login Completed" });
+	} catch (error) {
+		res.status(500).send({ message: "Internal Server Error" });
+	}
+})
 
 module.exports = router;
