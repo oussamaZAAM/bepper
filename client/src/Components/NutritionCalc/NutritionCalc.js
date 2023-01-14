@@ -1,20 +1,15 @@
 import React, { useEffect, useState } from 'react'
-import "./NutritionCalc.css"
+import { useNavigate } from 'react-router-dom';
 
-import { Button, MenuItem, Select, TextField, Tooltip } from '@mui/material';
+import { Button, Card, CardActionArea, CardContent, CardMedia, MenuItem, MobileStepper, Select, TextField, Tooltip, Typography } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
-import MobileStepper from '@mui/material/MobileStepper';
 import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import {TbGenderMale, TbGenderFemale} from 'react-icons/tb';
 
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { TbGenderMale, TbGenderFemale } from 'react-icons/tb';
 import { FiSkipForward } from 'react-icons/fi';
+
+import "./NutritionCalc.css"
 
 const singleQuote = "'"
 const doubleQuotes = '"'

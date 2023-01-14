@@ -1,23 +1,12 @@
 import * as React from 'react';
-import PropTypes from 'prop-types';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Divider from '@mui/material/Divider';
-import Drawer from '@mui/material/Drawer';
-import IconButton from '@mui/material/IconButton';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemText from '@mui/material/ListItemText';
-import MenuIcon from '@mui/icons-material/Menu';
-import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
-
-import "./Navbar.css"
 import { Link } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
-import { Avatar, Menu, MenuItem } from '@mui/material';
+import PropTypes from 'prop-types';
+
+import MenuIcon from '@mui/icons-material/Menu';
+import { AppBar, Avatar, Box, Button, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemText, Menu, MenuItem, Toolbar, Typography } from '@mui/material';
+
+import "./Navbar.css"
 
 const drawerWidth = 240;
 const navItems = ['Home', 'About', 'Contact'];

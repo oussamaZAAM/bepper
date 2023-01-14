@@ -4,10 +4,12 @@ import Avatar from '@mui/material/Avatar';
 import { Badge } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-import './Settings.css'
+//Components
 import AccountOverview from '../Settings/AccountOverview';
 import ModifyProfile from '../Settings/ModifyProfile';
 import ChangePassword from '../Settings/ChangePassword';
+//Styles
+import './Settings.css'
 
 const sideBorder = 2;
 const clickedBorder = 4;

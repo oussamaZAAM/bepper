@@ -1,6 +1,8 @@
-import './App.css';
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useCookies } from 'react-cookie';
+
+//Components
 import Navbar from './Components/Navbar/Navbar';
 import { Footer } from './Components/Footer/Footer.js';
 import Footer2 from './Components/Footer/Footer2';
@@ -11,10 +13,12 @@ import Login from "./Components/Login";
 import EmailVerify from "./Components/EmailVerify";
 import ForgotPassword from './Components/ForgotPassword';
 import PasswordReset from "./Components/PasswordReset";
-import { useCookies } from 'react-cookie';
 import Test from './Components/Test/Test';
 import CompleteLogin from './Components/EmailVerify/CompleteLogin';
 import Settings from './Components/Settings/Settings';
+
+//Styles
+import './App.css';
 
 function App() {
   const [cookie, setCookie, removeCookie] = useCookies("token");

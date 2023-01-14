@@ -1,8 +1,10 @@
-import { Skeleton } from '@mui/material';
-import axios from 'axios';
-import dayjs from 'dayjs';
 import React, { useEffect, useState } from 'react';
 import { useCookies } from 'react-cookie';
+import axios from 'axios';
+import dayjs from 'dayjs';
+
+import { Skeleton } from '@mui/material';
+
 import './Settings.css';
 
 const AccountOverview = () => {

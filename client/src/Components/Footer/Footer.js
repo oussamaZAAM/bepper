@@ -1,4 +1,5 @@
 import React from 'react';
+
 import {
   MDBFooter,
   MDBContainer,
@@ -6,9 +7,10 @@ import {
   MDBRow,
   MDBInput
 } from 'mdb-react-ui-kit';
-import "./Footer.css"
 import Button from "@mui/material/Button"
 import {FiFacebook, FiTwitter, FiLinkedin, FiGithub, FiInstagram} from 'react-icons/fi'
+
+import "./Footer.css"
 import fullLogo from "../../Logos/full logo/green.png";
 
 export function Footer() {

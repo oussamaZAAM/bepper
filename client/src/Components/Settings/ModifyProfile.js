@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from "react-router-dom";
+import { useCookies } from 'react-cookie';
+import axios from 'axios';
+import dayjs from 'dayjs';
 
-import { Autocomplete, Box, Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
-import Stack from '@mui/material/Stack';
+import { Autocomplete, Box, Button, FormControl, InputLabel, MenuItem, Stack, Select, TextField } from '@mui/material';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DesktopDatePicker } from '@mui/x-date-pickers/DesktopDatePicker';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { inputLabelClasses } from "@mui/material/InputLabel";
 
 import countries from './Countries';
-import dayjs from 'dayjs';
-import axios from 'axios';
-import { useCookies } from 'react-cookie';
-// import './Settings.css';
+import './Settings.css';
 
 const ModifyProfile = (props) => {
     const { REACT_APP_BASE_URL } = process.env;

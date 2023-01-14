@@ -2,9 +2,11 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+
+import { Fragment } from "react/cjs/react.production.min";
+
 import success from "../../images/success.png";
 import styles from "./styles.module.css";
-import { Fragment } from "react/cjs/react.production.min";
 
 const EmailVerify = () => {
     const { REACT_APP_BASE_URL } = process.env;

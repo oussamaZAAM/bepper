@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useCookies } from 'react-cookie'
-import axios from "axios";
 import { Link } from "react-router-dom";
+import axios from "axios";
+
 import styles from "./styles.module.css";
 import { FcGoogle } from "react-icons/fc";
-import { GoogleLogin } from '@react-oauth/google';
 
 const Login = () => {
 	const [cookie, setCookie, removeCookie] = useCookies("token");

@@ -1,7 +1,8 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 import ModifyProfile from '../Settings/ModifyProfile';
 import styles from "./styles.module.css";
 
