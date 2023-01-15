@@ -115,6 +115,30 @@ hr{
 .profile-wrapper{
     width: 220px;
 }
+
+/* Password Valid */
+.valid_msg {
+	width: 370px;
+	padding: 15px;
+	margin: 5px 0;
+	font-size: 14px;
+	background-color: #5daf2f;
+	color: white;
+	border-radius: 5px;
+	text-align: center;
+}
+/* Password Error */
+.error_msg {
+	width: 370px;
+	padding: 15px;
+	margin: 5px 0;
+	font-size: 14px;
+	background-color: #f34646;
+	color: white;
+	border-radius: 5px;
+	text-align: center;
+}
+
 /* Password Submit Button */
 .password-btn{
     color: black !important;

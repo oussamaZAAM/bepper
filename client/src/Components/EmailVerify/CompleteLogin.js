@@ -20,7 +20,7 @@ const CompleteLogin = () => {
   return (
 	<div className={styles.login_container}>
         <div className={styles.login_form_container}>
-            <ModifyProfile completing={true} sendData={(data)=>commitData(data)}/>
+            <ModifyProfile completing={true} sendData={(data)=>commitData(data)}/> 
         </div>
     </div>
   )

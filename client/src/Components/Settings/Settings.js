@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { useCookies } from 'react-cookie';
+import axios from 'axios';
 
 import Avatar from '@mui/material/Avatar';
 import { Badge } from '@mui/material';
@@ -22,6 +24,33 @@ const SmallAvatar = styled(Avatar)(({ theme }) => ({
 
 const Settings = () => {
     const [swapper, setSwapper] = useState('overview');
+
+    const { REACT_APP_BASE_URL } = process.env;
+    const [cookie, setCookie, removeCookie] = useCookies("token");
+    const userId = cookie.user;
+
+    
+    //Set Valid-Error Message
+    const [valid, setValid] = useState("");
+    const [error, setError] = useState("");
+
+
+    const commitData = async (data) =>{
+        try{
+            const res = await axios.put(REACT_APP_BASE_URL+'/api/users/'+userId+'/completelogin', data);
+            setValid(res.data);
+            setError('');
+        } catch(error){
+            if (
+                error.response &&
+                error.response.status >= 400 &&
+                error.response.status <= 500
+            ) {
+                setValid('');
+                setError(error.response.data.message);
+            }
+        }
+      }
   return (
     <div className='dashboard'>
         <div className='avatar-container'>
@@ -82,10 +111,10 @@ const Settings = () => {
             {swapper === 'overview' && <AccountOverview />}
 
             {/* Modify Profile */}
-            {swapper === 'profile' && <ModifyProfile />}
+            {swapper === 'profile' && <ModifyProfile valid={valid} error={error} sendData={(data)=>commitData(data)} handleCancel={()=>setSwapper('overview')}/>}
 
             {/* Change Password */}
-            {swapper === 'password' && <ChangePassword />}
+            {swapper === 'password' && <ChangePassword handleCancel={()=>setSwapper('overview')} />}
 
         </div>
     </div>

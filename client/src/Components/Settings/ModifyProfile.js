@@ -20,8 +20,7 @@ const ModifyProfile = (props) => {
     //Fetch User's Token
     const [cookie, setCookie, removeCookie] = useCookies("token");
     const userId = cookie.user;
-
-
+    
 
     const handleChange = (event) => {
         setInfos({...infos, [event.target.name]: event.target.value});
@@ -108,6 +107,9 @@ const ModifyProfile = (props) => {
                     type='email'
                     label="Email"
                     variant="filled"
+                    InputProps={{
+                        readOnly: true,
+                      }}
                     InputLabelProps={{
                         sx: {
                           [`&.${inputLabelClasses.shrink}`]: {
@@ -184,8 +186,10 @@ const ModifyProfile = (props) => {
                         />
                     </div>
                 </div>
+                <div className='flex-center'>{props.valid && <div className='valid_msg'>{props.valid}</div>}</div>
+                <div className='flex-center'>{props.error && <div className='error_msg'>{props.error}</div>}</div>
                 <div className="settings-buttons flex-center">
-                    {!props.completing && <Button className='cancel-btn'>Cancel</Button>}
+                    {!props.completing && <Button className='cancel-btn' onClick={props.handleCancel}>Cancel</Button>}
                     <div className='flex-center profile-wrapper'>
                         <Button  className='profile-btn' type='submit'>Save Profile</Button>
                     </div>
