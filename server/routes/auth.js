@@ -19,7 +19,7 @@ router.post("/", async (req, res) => {
 		const validPassword = await bcrypt.compare(
 			req.body.password,
 			user.password
-		);
+		); 
 		if (!validPassword)
 			return res.status(401).send({ message: "Invalid Email or Password" });
 
@@ -46,6 +46,30 @@ router.post("/", async (req, res) => {
 		res.status(500).send({ message: "Internal Server Error" });
 	}
 });
+
+router.put('/change-password', async (req, res) => {
+	try {
+
+		const user = await User.findOne({_id: req.body.userId})
+		if (!user)
+			return res.status(401).send({ message: "Error: User not Found" });
+
+		const validPassword = await bcrypt.compare(
+			req.body.current,
+			user.password
+		);
+		if (!validPassword)
+			return res.status(401).send({ message: "Invalid Password" });
+		
+		const salt = await bcrypt.genSalt(Number(process.env.SALT));
+		const hashPassword = await bcrypt.hash(req.body.newOne, salt);
+			
+		await User.updateOne({_id: user._id}, {password: hashPassword});
+		res.status(200).send('Password updated successfully')
+	} catch (error) {
+		res.status(500).send({ message: "Internal Server Error" });
+	}
+})
 
 const validate = (data) => {
 	const schema = Joi.object({

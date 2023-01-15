@@ -1,12 +1,24 @@
 import React, { useState } from 'react'
+import { useCookies } from 'react-cookie';
 
 import { Box, Button, FilledInput, FormControl, IconButton, InputAdornment, InputLabel } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 import './Settings.css'
+import axios from 'axios';
 
-const ChangePassword = () => {
+const ChangePassword = (props) => {
+    const { REACT_APP_BASE_URL } = process.env;
+
+    //Fetch User's Token
+    const [cookie, setCookie, removeCookie] = useCookies("token");
+    const userId = cookie.user;
+
+    //Set Valid-Error Message
+    const [valid, setValid] = useState("");
+    const [error, setError] = useState("");
+
     const [current, setCurrent] = useState({
         password: '',
         showPassword: false,
@@ -49,8 +61,36 @@ const ChangePassword = () => {
     };
 
     const handleMouseDownPassword = (event) => {
-    event.preventDefault();
+        event.preventDefault();
     };
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        if (newOne.password === verify.password) {
+            try{
+                const data = {
+                    current: current.password,
+                    newOne: newOne.password,
+                    verify: verify.password,
+                    userId: userId
+                }
+                const res = await axios.put(REACT_APP_BASE_URL+'/api/auth/change-password', data);
+                setValid(res.data);
+                setError('');
+            } catch (error) {
+                if (
+                    error.response &&
+                    error.response.status >= 400 &&
+                    error.response.status <= 500
+                ) {
+                    setValid('');
+                    setError(error.response.data.message);
+                }
+            }
+        } else {
+            alert('Passwords do not match!');
+        }
+    }
   return (
     <div className='w-100 row m-0'>
         <div className='col-0 col-md-1 col-lg-2 col-xl-3'></div>
@@ -63,13 +103,14 @@ const ChangePassword = () => {
                     '& .MuiTextField-root': { m: 1, width: '25ch' },
                 }}
                 autoComplete="off"
+                onSubmit={handleSubmit}
             >
                 <FormControl sx={{ m: 1, width: '100%' }} variant="filled">
                     <InputLabel htmlFor="filled-adornment-password">Current Password</InputLabel>
                     <FilledInput
                         className='w-100'
                         required
-                        id="filled-adornment-password"
+                        id="filled-adornment-password1"
                         type={current.showPassword ? 'text' : 'password'}
                         value={current.password}
                         onChange={(e)=>handleChange('current', e)}
@@ -92,7 +133,7 @@ const ChangePassword = () => {
                     <FilledInput
                         className='w-100'
                         required
-                        id="filled-adornment-password"
+                        id="filled-adornment-password2"
                         type={newOne.showPassword ? 'text' : 'password'}
                         value={newOne.password}
                         onChange={(e)=>handleChange('newOne', e)}
@@ -115,7 +156,7 @@ const ChangePassword = () => {
                     <FilledInput
                         className='w-100'
                         required
-                        id="filled-adornment-password"
+                        id="filled-adornment-password3"
                         type={verify.showPassword ? 'text' : 'password'}
                         value={verify.password}
                         onChange={(e)=>handleChange('verify', e)}
@@ -133,8 +174,10 @@ const ChangePassword = () => {
                         }
                     />
                 </FormControl>
+                <div className='flex-center'>{valid && <div className='valid_msg'>{valid}</div>}</div>
+                <div className='flex-center'>{error && <div className='error_msg'>{error}</div>}</div>
                 <div className="settings-buttons flex-center">
-                    <Button className='cancel-btn'>Cancel</Button>
+                    <Button className='cancel-btn' onClick={props.handleCancel}>Cancel</Button>
                     <div className='flex-center password-wrapper'>
                         <Button className='password-btn' type='submit'>Define a New Password</Button>
                     </div>

@@ -79,6 +79,8 @@ router.get("/:id/verify/:token/", async (req, res) => {
 router.put("/:id/completelogin", async (req, res) => {
 	try {
 		const user = await User.findOne({ _id: req.params.id});
+		if (!user) return res.status(400).send({ message: "Invalid link no User" });
+		
 		await User.updateOne({ _id: user._id}, { $set: { 
 			username: req.body.username, 
 			gender: req.body.gender,
@@ -86,7 +88,7 @@ router.put("/:id/completelogin", async (req, res) => {
 			region: req.body.region
 		 }});
 
-		 res.status(200).send({ message: "Login Completed" });
+		 res.status(200).send("Profile updated successfully");
 	} catch (error) {
 		res.status(500).send({ message: "Internal Server Error" });
 	}
