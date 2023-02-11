@@ -33,7 +33,7 @@ app.use(express.static(path.join(__dirname, "./client/build")));
 
 app.use("*", function (_, res) {
   res.sendFile(
-    path.join(__dirname, "./client/build.index.js"),
+    path.join(__dirname, "./client/build/.index.js"),
     function (err) {
       res.status(500).send(err);
     }
