@@ -1,8 +1,10 @@
 const express = require('express');
-const app = express();
 const dotenv = require('dotenv');
-dotenv.config();
 const cors = require('cors');
+const path = require('path');
+
+const app = express();
+dotenv.config();
 app.use(cors());
 
 const connection = require("./db");
@@ -25,6 +27,18 @@ app.use("/api/password-reset", passwordResetRoutes);
 app.get("/api/api-key", (req, res) => {
   res.send(process.env.apiKey);
 })
+
+//Serve the frontend
+app.use(express.static(path.join(__dirname, "./client/build")));
+
+app.use("*", function (_, res) {
+  res.sendFile(
+    path.join(__dirname, "./client/build.index.js"),
+    function (err) {
+      res.status(500).send(err);
+    }
+  );
+});
 
 app.listen(process.env.PORT, () => {
   console.log("Listening on http://localhost:"+process.env.PORT);
