@@ -14,7 +14,7 @@ import ImageEffect from './ImageEffect';
 
 
 const Diets = () => {
-    const { REACT_APP_BASE_URL } = process.env;
+    // const { REACT_APP_BASE_URL } = process.env;
     const existingCalories = localStorage.getItem('calories');
     var existingBreakfast = JSON.parse(localStorage.getItem('breakfast'));
     var existingLunch = JSON.parse(localStorage.getItem('lunch'));
@@ -98,7 +98,7 @@ const Diets = () => {
 
     useEffect(()=>{
       const fetchKey = async () => {
-        const res = await axios.get(REACT_APP_BASE_URL+"/api/api-key");
+        const res = await axios.get("/api/api-key");
         setKey(res.data);
       }
       fetchKey();

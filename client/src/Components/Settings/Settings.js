@@ -25,7 +25,7 @@ const SmallAvatar = styled(Avatar)(({ theme }) => ({
 const Settings = () => {
     const [swapper, setSwapper] = useState('overview');
 
-    const { REACT_APP_BASE_URL } = process.env;
+    // const { REACT_APP_BASE_URL } = process.env;
     const [cookie, setCookie, removeCookie] = useCookies("token");
     const userId = cookie.user;
 
@@ -37,7 +37,7 @@ const Settings = () => {
 
     const commitData = async (data) =>{
         try{
-            const res = await axios.put(REACT_APP_BASE_URL+'/api/users/'+userId+'/completelogin', data);
+            const res = await axios.put('/api/users/'+userId+'/completelogin', data);
             setValid(res.data);
             setError('');
         } catch(error){

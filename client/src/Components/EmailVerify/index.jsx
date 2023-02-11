@@ -9,7 +9,7 @@ import success from "../../images/success.png";
 import styles from "./styles.module.css";
 
 const EmailVerify = () => {
-    const { REACT_APP_BASE_URL } = process.env;
+    // const { REACT_APP_BASE_URL } = process.env;
 	const [validUrl, setValidUrl] = useState(true);
 	const param = useParams();
 
@@ -18,7 +18,8 @@ const EmailVerify = () => {
 	useEffect(() => {
 		const verifyEmailUrl = async () => {
 			try {
-				const url = `${REACT_APP_BASE_URL}/api/users/${param.id}/verify/${param.token}`;
+				// const url = `${REACT_APP_BASE_URL}/api/users/${param.id}/verify/${param.token}`;
+				const url = `/api/users/${param.id}/verify/${param.token}`;
 				const { data } = await axios.get(url);
 				setValidUrl(true);
 				// navigate("/completelogin"); 

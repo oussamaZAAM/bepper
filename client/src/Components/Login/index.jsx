@@ -8,12 +8,12 @@ import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
 	const [cookie, setCookie, removeCookie] = useCookies("token");
-    const { REACT_APP_BASE_URL } = process.env;
+    // const { REACT_APP_BASE_URL } = process.env;
 	const [data, setData] = useState({ email: "", password: "" });
 	const [error, setError] = useState("");
 
 	const google = () => {
-		window.open(REACT_APP_BASE_URL+"/auth/google", "_self");
+		window.open("/auth/google", "_self");
 	};
 
 	const handleChange = ({ currentTarget: input }) => {
@@ -23,7 +23,7 @@ const Login = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const url = REACT_APP_BASE_URL+"/api/auth";
+			const url = "/api/auth";
 			const { data: res } = await axios.post(url, data);
 			setCookie("token", res.data);
 			setCookie("user", res.user);

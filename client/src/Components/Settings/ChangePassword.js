@@ -9,7 +9,7 @@ import './Settings.css'
 import axios from 'axios';
 
 const ChangePassword = (props) => {
-    const { REACT_APP_BASE_URL } = process.env;
+    // const { REACT_APP_BASE_URL } = process.env;
 
     //Fetch User's Token
     const [cookie, setCookie, removeCookie] = useCookies("token");
@@ -74,7 +74,7 @@ const ChangePassword = (props) => {
                     verify: verify.password,
                     userId: userId
                 }
-                const res = await axios.put(REACT_APP_BASE_URL+'/api/auth/change-password', data);
+                const res = await axios.put('/api/auth/change-password', data);
                 setValid(res.data);
                 setError('');
             } catch (error) {

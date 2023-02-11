@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
 
 const Signup = () => {
-    const { REACT_APP_BASE_URL } = process.env;
+    // const { REACT_APP_BASE_URL } = process.env;
 	const [data, setData] = useState({
 		firstName: "",
 		lastName: "",
@@ -22,7 +22,7 @@ const Signup = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const url = REACT_APP_BASE_URL+"/api/users";
+			const url = "/api/users";
 			const { data: res } = await axios.post(url, data);
 			setMsg(res.message);
 		} catch (error) {

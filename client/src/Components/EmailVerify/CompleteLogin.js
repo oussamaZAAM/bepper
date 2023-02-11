@@ -8,13 +8,13 @@ import styles from "./styles.module.css";
 
 
 const CompleteLogin = () => { 
-    const { REACT_APP_BASE_URL } = process.env;
+    // const { REACT_APP_BASE_URL } = process.env;
     const [cookie, setCookie, removeCookie] = useCookies("token");
     const userId = cookie.user;
 
     const navigate = useNavigate();
     const commitData = async (data) =>{
-      await axios.put(REACT_APP_BASE_URL+'/api/users/'+userId+'/completelogin', data);
+      await axios.put('/api/users/'+userId+'/completelogin', data);
       navigate('/');
     }
   return (

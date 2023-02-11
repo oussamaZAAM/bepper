@@ -4,7 +4,7 @@ import axios from "axios";
 import styles from "./styles.module.css";
 
 const ForgotPassword = () => {
-    const { REACT_APP_BASE_URL } = process.env;
+    // const { REACT_APP_BASE_URL } = process.env;
 	const [email, setEmail] = useState("");
 	const [msg, setMsg] = useState("");
 	const [error, setError] = useState("");
@@ -12,7 +12,8 @@ const ForgotPassword = () => {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const url = `${REACT_APP_BASE_URL}/api/password-reset`;
+			// const url = `${REACT_APP_BASE_URL}/api/password-reset`;
+			const url = `/api/password-reset`;
 			const { data } = await axios.post(url, { email });
 			setMsg(data.message);
 			setError("");

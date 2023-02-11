@@ -13,7 +13,7 @@ import countries from './Countries';
 import './Settings.css';
 
 const ModifyProfile = (props) => {
-    const { REACT_APP_BASE_URL } = process.env;
+    // const { REACT_APP_BASE_URL } = process.env;
 
     const [infos, setInfos] = useState({username: '', email: (props.completing ? 'filler' : ''), gender: '', birthday: dayjs(''), region: ''});
 
@@ -52,7 +52,7 @@ const ModifyProfile = (props) => {
     //Fetch User's data
     useEffect(() =>{
       const fetchUser = async () => {
-        const res = await axios.get(REACT_APP_BASE_URL+'/api/users/'+userId);
+        const res = await axios.get('/api/users/'+userId);
         setInfos({
             ...infos, 
             username: res.data.username,
