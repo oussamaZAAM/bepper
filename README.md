@@ -1,6 +1,9 @@
 # Bepper
 Diets &amp; Fitness
 
+## Demo
+[I'm an inline-style link with title](https://dead-jade-grasshopper-tutu.cyclic.app "Bepper")
+
 ## HomePage
 You can add your informations about your body such as age, sex, height, weight, and your activity level. The App will generate the amount of calories you need daily.
 <p align="center">
