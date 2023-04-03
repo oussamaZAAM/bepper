@@ -1,6 +1,9 @@
 # Bepper
 Diets &amp; Fitness
 
+## Demo
+[Bepper version 1.1](https://bepper.cyclic.app "Bepper")
+
 ## HomePage
 You can add your informations about your body such as age, sex, height, weight, and your activity level. The App will generate the amount of calories you need daily.
 <p align="center">
