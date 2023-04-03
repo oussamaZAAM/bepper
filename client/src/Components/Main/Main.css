@@ -45,4 +45,6 @@
 }
 .desc-textarea{
     max-width: 30rem;
+    margin-left: 20px;
+    font-family: 'Noto Sans Mono', monospace;
 }
