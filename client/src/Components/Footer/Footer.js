@@ -48,14 +48,14 @@ export function Footer() {
           </div>
           <div className='d-flex align-items-center justify-content-center'>
           <a
-            class="spin circle btn btn-link btn-floating btn-lg text-dark "
+            className="spin circle btn btn-link btn-floating btn-lg text-dark "
             href="#!"
             role="button"
             data-mdb-ripple-color="dark"
             ><FiFacebook /></a>
 
           <a
-            class="spin circle btn btn-link btn-floating btn-lg text-dark "
+            className="spin circle btn btn-link btn-floating btn-lg text-dark "
             href="#!"
             role="button"
             data-mdb-ripple-color="dark"
@@ -63,20 +63,20 @@ export function Footer() {
 
 
           <a
-            class="spin circle btn btn-link btn-floating btn-lg text-dark "
+            className="spin circle btn btn-link btn-floating btn-lg text-dark "
             href="#!"
             role="button"
             data-mdb-ripple-color="dark"
             ><FiInstagram /></a>
 
           <a
-            class="spin circle btn btn-link btn-floating btn-lg text-dark "
+            className="spin circle btn btn-link btn-floating btn-lg text-dark "
             href="#!"
             role="button"
             data-mdb-ripple-color="dark"
           ><FiLinkedin /></a>
           <a
-            class="spin circle btn btn-link btn-floating btn-lg text-dark "
+            className="spin circle btn btn-link btn-floating btn-lg text-dark "
             href="#!"
             role="button"
             data-mdb-ripple-color="dark"
