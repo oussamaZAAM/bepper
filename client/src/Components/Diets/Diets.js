@@ -18,36 +18,7 @@ const Diets = () => {
   var existingBreakfast = JSON.parse(localStorage.getItem("breakfast"));
   var existingLunch = JSON.parse(localStorage.getItem("lunch"));
   var existingDinner = JSON.parse(localStorage.getItem("dinner"));
-
-  //   const food = [
-  //     {
-  //         "id": 636026,
-  //         "imageType": "jpg",
-  //         "title": "Breakfast Biscuits and Gravy",
-  //         "readyInMinutes": 45,
-  //         "servings": 4,
-  //         "sourceUrl": "https://spoonacular.com/breakfast-biscuits-and-gravy-636026"
-  //     },
-  //     {
-  //         "id": 643634,
-  //         "imageType": "jpg",
-  //         "title": "Macaroni with Fresh Tomatoes and Beans",
-  //         "readyInMinutes": 25,
-  //         "servings": 4,
-  //         "sourceUrl": "https://spoonacular.com/macaroni-with-fresh-tomatoes-and-beans-643634"
-  //     },
-  //     {
-  //         "id": 643781,
-  //         "imageType": "jpg",
-  //         "title": "Fried Ravioli & Mint Parsley Pesto",
-  //         "readyInMinutes": 45,
-  //         "servings": 4,
-  //         "sourceUrl": "https://spoonacular.com/fried-ravioli-mint-parsley-pesto-643781"
-  //     }
-  // ]
-  //   const breakfast = food[0]
-  //   const lunch = food[1]
-  //   const dinner = food[2]
+  var existingSnack = JSON.parse(localStorage.getItem("snack"));
 
   const [key, setKey] = useState();
 
@@ -59,11 +30,14 @@ const Diets = () => {
   const [isLunchSaved, setIsLunchSaved] = useState(false);
   const [dinner, setDinner] = useState(existingDinner && existingDinner);
   const [isDinnerSaved, setIsDinnerSaved] = useState(false);
+  const [snack, setSnack] = useState(existingSnack && existingSnack);
+  const [isSnackSaved, setIsSnackSaved] = useState(false);
 
   const [loading, setLoading] = useState(false);
   const [breakfastLoader, setBreakfastLoader] = useState(false);
   const [lunchLoader, setLunchLoader] = useState(false);
   const [dinnerLoader, setDinnerLoader] = useState(false);
+  const [snackLoader, setSnackLoader] = useState(false);
 
   function SkeletonComponent() {
     return (
@@ -90,29 +64,25 @@ const Diets = () => {
       case "dinner":
         setIsDinnerSaved((prev) => !prev);
         break;
+      case "snack":
+        setIsSnackSaved((prev) => !prev);
+        break;
     }
   };
   const SaveMeal = (e) => {
     e.stopPropagation();
-    console.log(12);
+    console.log('test');
     //Service coming soon ...
   };
 
   useEffect(() => {
-    // const fetchKey = async () => {
-    //   const res = await axios.get(REACT_APP_BASE_URL+"/api/api-key");
-    //   setKey(res.data);
-    // }
-    // fetchKey();
+
     const fetchFood = async () => {
       !isBreakfastSaved && setBreakfastLoader(true);
       !isLunchSaved && setLunchLoader(true);
       !isDinnerSaved && setDinnerLoader(true);
-      // const res = await axios.get("https://api.spoonacular.com/mealplanner/generate?apiKey="+key+"&timeFrame=day&targetCalories="+existingCalories, {
-      // // headers: {
-      // //   'x-api-key': key
-      // // }
-      // })
+      !isSnackSaved && setSnackLoader(true);
+
       const mealsPlanning = {
         breakfast: [200, 300],
         lunch: [300, 600],
@@ -138,12 +108,17 @@ const Diets = () => {
         setDinner(res.data[2]);
         localStorage.setItem("dinner", JSON.stringify(res.data[2]));
       }
+      if (!isSnackSaved) {
+        setSnack(res.data[3]);
+        localStorage.setItem("snack", JSON.stringify(res.data[3]));
+      }
       setLoading(false);
       setBreakfastLoader(false);
       setLunchLoader(false);
       setDinnerLoader(false);
+      setSnackLoader(false);
     };
-    !existingBreakfast && (!isBreakfastSaved || !isLunchSaved || !isDinnerSaved)
+    !existingBreakfast && (!isBreakfastSaved || !isLunchSaved || !isDinnerSaved || !isSnackSaved)
       ? fetchFood()
       : setLoading(false);
   }, [loading]);
@@ -166,7 +141,7 @@ const Diets = () => {
             </div>
           </div>
         </div>
-        <div className="container m-3 flex-column-css">
+        <div className=" m-3 flex-column-css">
           <div className="flex-center align-items-start meals-background row">
             <div className="regenerate d-flex flex-column align-items-center justify-content-center">
               <h1 className="title">Your Daily Meal</h1>
@@ -215,7 +190,7 @@ const Diets = () => {
                         <div
                           className={
                             "w-100 my-2 flex-center " +
-                            (isBreakfastSaved && "blurred")
+                            (isBreakfastSaved ? "blurred" : "")
                           }
                         >
                           <ImageEffect
@@ -235,10 +210,10 @@ const Diets = () => {
                             />
                           </div>
                         )}
-                        <h4 className={isBreakfastSaved && "blurred"}>
+                        <h4 className={isBreakfastSaved ? "blurred" : ""}>
                           {breakfast.name}
                         </h4>
-                        <p className={isBreakfastSaved && "blurred"}>
+                        <p className={isBreakfastSaved ? "blurred" : ""}>
                           Calories: <b>{breakfast.calories} calories</b>
                         </p>
                       </div>
@@ -266,11 +241,11 @@ const Diets = () => {
                         <div
                           className={
                             "w-100 my-2 flex-center " +
-                            (isLunchSaved && "blurred")
+                            (isLunchSaved ? "blurred" : "")
                           }
                         >
                           <ImageEffect
-                            className={isLunchSaved && "blurred"}
+                            className={isLunchSaved ? "blurred" : ""}
                             meal={lunch}
                           />
                         </div>
@@ -286,10 +261,10 @@ const Diets = () => {
                             />
                           </div>
                         )}
-                        <h4 className={isLunchSaved && "blurred"}>
+                        <h4 className={isLunchSaved ? "blurred" : ""}>
                           {lunch.name}
                         </h4>
-                        <p className={isLunchSaved && "blurred"}>
+                        <p className={isLunchSaved ? "blurred" : ""}>
                           Calories: <b>{lunch.calories} calories</b>
                         </p>
                       </div>
@@ -319,11 +294,11 @@ const Diets = () => {
                         <div
                           className={
                             "w-100 my-2 flex-center " +
-                            (isDinnerSaved && "blurred")
+                            (isDinnerSaved ? "blurred" : "")
                           }
                         >
                           <ImageEffect
-                            className={isDinnerSaved && "blurred"}
+                            className={isDinnerSaved ? "blurred" : ""}
                             meal={dinner}
                           />
                         </div>
@@ -339,11 +314,64 @@ const Diets = () => {
                             />
                           </div>
                         )}
-                        <h4 className={isDinnerSaved && "blurred"}>
+                        <h4 className={isDinnerSaved ? "blurred" : ""}>
                           {dinner.name}
                         </h4>
-                        <p className={isDinnerSaved && "blurred"}>
+                        <p className={isDinnerSaved ? "blurred" : ""}>
                           Calories: <b>{dinner.calories} calories</b>
+                        </p>
+                      </div>
+                    </Tooltip>
+                  ) : (
+                    <SkeletonComponent />
+                  )}
+                </div>
+
+                <div className="col-12 col-md-5 col-lg-4 p-3 flex-column-css">
+                  <h4 style={{ color: "#FF8400" }}>Snack</h4>
+                  {!snackLoader ? (
+                    <Tooltip
+                      title={
+                        isSnackSaved ? "Click to Unlock" : "Click to Lock"
+                      }
+                      followCursor
+                      onClick={(e) => LockMeal("snack", e)}
+                    >
+                      <div
+                        className="w-100 m-2 p-3 meals meals-snack flex-column-css align-items-start"
+                        style={{
+                          backgroundColor:
+                            isSnackSaved && "rgb(255, 132, 0, 0.75)",
+                        }}
+                      >
+                        <div
+                          className={
+                            "w-100 my-2 flex-center " +
+                            (isSnackSaved ? "blurred" : "")
+                          }
+                        >
+                          <ImageEffect
+                            className={isSnackSaved ? "blurred" : ""}
+                            meal={snack}
+                          />
+                        </div>
+                        {isSnackSaved && (
+                          <div className="save-icon flex-center">
+                            <BsFillBookmarkPlusFill
+                              onClick={(e) => SaveMeal(e)}
+                              size={50}
+                              style={{
+                                filter:
+                                  "drop-shadow(0 0 0.75rem rgb(255, 132, 0, 1))",
+                              }}
+                            />
+                          </div>
+                        )}
+                        <h4 className={isSnackSaved ? "blurred" : ""}>
+                          {dinner.name}
+                        </h4>
+                        <p className={isSnackSaved ? "blurred" : ""}>
+                          Calories: <b>{snack.calories} calories</b>
                         </p>
                       </div>
                     </Tooltip>
