@@ -11,7 +11,7 @@
   -o-transition: all 0.5s;
   transition: all 0.5s;
   transition: all 0.5s; 
-  box-shadow: 1px 1px 20px -5px rgba(0,0,0,0.5);  
+  box-shadow: 1px 1px 20px -5px rgba(0,0,0,0.5);
 }
 
 .cont_img_back {
@@ -26,9 +26,10 @@
   -o-transition: all 0.5s;
   transition: all 0.5s;
   transition: all 1s;
+  transform: scale(0.55);
 }
 
 .cont_img_back:hover > img {
-  transform: scale(1.5);
+  transform: scale(1);
 }
 
