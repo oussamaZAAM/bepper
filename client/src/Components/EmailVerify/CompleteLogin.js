@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useCookies } from 'react-cookie';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -9,7 +9,7 @@ import styles from "./styles.module.css";
 
 const CompleteLogin = () => { 
     const REACT_APP_BASE_URL = "https://bepper.cyclic.app";
-    const [cookie, setCookie, removeCookie] = useCookies("token");
+    const [cookie] = useCookies("token");
     const userId = cookie.user;
 
     const navigate = useNavigate();

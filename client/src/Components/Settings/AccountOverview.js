@@ -13,7 +13,7 @@ const AccountOverview = () => {
     const [infos, setInfos] = useState({username: '', email: '', gender: '', birthday: dayjs(''), region: ''});
 
     //Fetch User's Token
-    const [cookie, setCookie, removeCookie] = useCookies("token");
+    const [cookie] = useCookies("token");
     const userId = cookie.user;
 
     //Fetch User's data

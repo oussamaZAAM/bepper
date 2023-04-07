@@ -13,13 +13,10 @@ const EmailVerify = () => {
 	const [validUrl, setValidUrl] = useState(true);
 	const param = useParams();
 
-	const navigate = useNavigate();
-
 	useEffect(() => {
 		const verifyEmailUrl = async () => {
 			try {
 				const url = `${REACT_APP_BASE_URL}/api/users/${param.id}/verify/${param.token}`;
-				const { data } = await axios.get(url);
 				setValidUrl(true);
 				// navigate("/completelogin"); 
 			} catch (error) {

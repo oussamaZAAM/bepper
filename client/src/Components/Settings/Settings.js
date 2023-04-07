@@ -26,7 +26,7 @@ const Settings = () => {
     const [swapper, setSwapper] = useState('overview');
 
     const REACT_APP_BASE_URL = "https://bepper.cyclic.app";
-    const [cookie, setCookie, removeCookie] = useCookies("token");
+    const [cookie] = useCookies("token");
     const userId = cookie.user;
 
     

@@ -18,7 +18,7 @@ const ModifyProfile = (props) => {
     const [infos, setInfos] = useState({username: '', email: (props.completing ? 'filler' : ''), gender: '', birthday: dayjs(''), region: ''});
 
     //Fetch User's Token
-    const [cookie, setCookie, removeCookie] = useCookies("token");
+    const [cookie] = useCookies("token");
     const userId = cookie.user;
     
 

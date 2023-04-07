@@ -38,8 +38,6 @@ const NutritionCalc = () => {
         weight: 'kg'
     })
     const [isRecap, setIsRecap] = useState(false);
-    const [letter, setLetter] = useState("H");
-
 
     const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -163,6 +161,8 @@ const NutritionCalc = () => {
                 case 'high':
                     setCalories(cals * 1.725);
                     break
+                default:
+                    void(0);
             }
         } else {
             const cals = 10*nutritionValue.weight + 6.25*nutritionValue.height - 5*nutritionValue.age - 161
@@ -176,6 +176,8 @@ const NutritionCalc = () => {
                 case 'high':
                     setCalories(cals * 1.725);
                     break
+                default:
+                    void(0);
             }
         }
     }
@@ -223,6 +225,8 @@ const NutritionCalc = () => {
             case 'recap':
                 setActiveStep(7);
                 break
+            default:
+                void(0);
         }
     }
     useEffect(()=>{
@@ -278,8 +282,7 @@ const NutritionCalc = () => {
 
             {activeStep === 2 &&<div className='Card flex-column-css'>
                 <h1 className='m-3' style={{fontFamily: 'Comfortaa, cursive'}}>What's
-                your {letter}
-                eight ?</h1>
+                your Height ?</h1>
                 <div className='container flex-center row'>
                     <div className='height flex-column-css col-10 col-md-6'>
                         <h6>
@@ -297,8 +300,8 @@ const NutritionCalc = () => {
                                 name='height'
                                 onChange={handleChange}
                                 type='number'
-                                inputProps={{style: {textAlign: 'center', fontSize: 30, fontFamily: 'Noto Sans Mono, monospace'}}}
                                 InputProps={{
+                                    style: {textAlign: 'center', fontSize: 30, fontFamily: 'Noto Sans Mono, monospace'},
                                     endAdornment: (
                                         <Select
                                             labelId="demo-simple-select-standard-label"
@@ -331,8 +334,8 @@ const NutritionCalc = () => {
                                 name='weight'
                                 onChange={handleChange}
                                 type='number'
-                                inputProps={{style: {textAlign: 'center', fontSize: 30, fontFamily: 'Noto Sans Mono, monospace'}}}
                                 InputProps={{
+                                    style: {textAlign: 'center', fontSize: 30, fontFamily: 'Noto Sans Mono, monospace'},
                                     endAdornment: (
                                         <Select
                                             labelId="demo-simple-select-standard-label"
@@ -371,8 +374,8 @@ const NutritionCalc = () => {
                     name='goalWeight'
                     onChange={handleChange}
                     type='number'
-                    inputProps={{style: {textAlign: 'center', fontSize: 30, fontFamily: 'Noto Sans Mono, monospace'}}}
                     InputProps={{
+                        style: {textAlign: 'center', fontSize: 30, fontFamily: 'Noto Sans Mono, monospace'},
                         endAdornment: (
                             <Select
                                 labelId="demo-simple-select-standard-label"
@@ -547,7 +550,7 @@ const NutritionCalc = () => {
                           onClick={()=>handleEatStyle('keto')}
                           style={{backgroundColor: nutritionValue.eatStyle === 'keto' && 'rgba(219,174,126,1)'}}
                           className='col-sm-12 col-md-4 m-1 container flex-column-css keto-diet'>
-                            <img src={require("../../Logos/Diets/keto.png")}/>
+                            <img alt='' src={require("../../Logos/Diets/keto.png")}/>
                             <p style={{fontFamily: 'Akaya Kanadaka, cursive'}} className='text-center'><small>low in carbohydrates but high in protein</small></p>
                         </div>
 
@@ -555,7 +558,7 @@ const NutritionCalc = () => {
                           onClick={()=>handleEatStyle('low-carb')}
                           style={{backgroundColor: nutritionValue.eatStyle === 'low-carb' && 'rgba(246,219,3,255)'}}
                           className='col-sm-12 col-md-4 m-1 container flex-column-css low-carb-diet'>
-                            <img src={require("../../Logos/Diets/low-carb.png")}/>
+                            <img alt='' src={require("../../Logos/Diets/low-carb.png")}/>
                             <p style={{fontFamily: 'Akaya Kanadaka, cursive'}} className='text-center'><small>restricts carbohydrates, but high in protein, fat, and vegetables</small></p>
                         </div>
 
@@ -563,7 +566,7 @@ const NutritionCalc = () => {
                           onClick={()=>handleEatStyle('paleo')}
                           style={{backgroundColor: nutritionValue.eatStyle === 'paleo' && 'rgba(216,45,48,1)'}}
                           className='col-sm-12 col-md-4 m-1 container flex-column-css paleo-diet'>
-                            <img src={require("../../Logos/Diets/paleo.png")}/>
+                            <img alt='' src={require("../../Logos/Diets/paleo.png")}/>
                             <p style={{fontFamily: 'Akaya Kanadaka, cursive'}} className='text-center'><small>emphasizes whole foods(fruits, seeds), while discouraging processed foods, sugar,grains</small></p>
                         </div>
 
@@ -571,7 +574,7 @@ const NutritionCalc = () => {
                           onClick={()=>handleEatStyle('mediterranean')}
                           style={{backgroundColor: nutritionValue.eatStyle === 'mediterranean' && 'rgba(179,200,57,255)'}}
                           className='col-sm-12 col-md-4 m-1 container flex-column-css mediterranean-diet'>
-                            <img src={require("../../Logos/Diets/mediterranean.png")}/>
+                            <img alt='' src={require("../../Logos/Diets/mediterranean.png")}/>
                             <p style={{fontFamily: 'Akaya Kanadaka, cursive'}} className='text-center'><small>lots of healthy foods like whole grains, fruits, vegetables, seafood, beans, and nuts</small></p>
                         </div>
 
@@ -579,7 +582,7 @@ const NutritionCalc = () => {
                           onClick={()=>handleEatStyle('no-sugar')}
                           style={{backgroundColor: nutritionValue.eatStyle === 'no-sugar' && 'rgba(69,186,240,255)'}}
                           className='col-sm-12 col-md-4 m-1 container flex-column-css no-sugar-diet'>
-                            <img src={require("../../Logos/Diets/no-sugar.png")}/>
+                            <img alt='' src={require("../../Logos/Diets/no-sugar.png")}/>
                             <p style={{fontFamily: 'Akaya Kanadaka, cursive'}} className='text-center'><small>eliminates foods containing added sugars</small></p>
                         </div>
 
@@ -587,7 +590,7 @@ const NutritionCalc = () => {
                           onClick={()=>handleEatStyle('raw')}
                           style={{backgroundColor: nutritionValue.eatStyle === 'raw' && 'rgba(119,171,44,255)'}}
                           className='col-sm-12 col-md-4 m-1 container flex-column-css raw-diet'>
-                            <img src={require("../../Logos/Diets/raw.png")}/>
+                            <img alt='' src={require("../../Logos/Diets/raw.png")}/>
                             <p style={{fontFamily: 'Akaya Kanadaka, cursive'}} className='text-center'><small>composed of mostly or completely raw and unprocessed foods</small></p>
                         </div>
                         
@@ -595,7 +598,7 @@ const NutritionCalc = () => {
                           onClick={()=>handleEatStyle('vegan')}
                           style={{backgroundColor: nutritionValue.eatStyle === 'vegan' && 'rgba(150,194,49,255)'}}
                           className='col-sm-12 col-md-4 m-1 container flex-column-css vegan-diet'>
-                            <img src={require("../../Logos/Diets/vegan.png")}/>
+                            <img alt='' src={require("../../Logos/Diets/vegan.png")}/>
                             <p style={{fontFamily: 'Akaya Kanadaka, cursive'}} className='text-center'><small>based on plants (such as vegetables, grains, nuts and fruits)</small></p>
                         </div>
 
@@ -603,7 +606,7 @@ const NutritionCalc = () => {
                           onClick={()=>handleEatStyle('vegetarian')}
                           style={{backgroundColor: nutritionValue.eatStyle === 'vegetarian' && 'rgba(119,170,37,255)'}}
                           className='col-sm-12 col-md-4 m-1 container flex-column-css vegetarian-diet'>
-                            <img src={require("../../Logos/Diets/vegetarian.png")}/>
+                            <img alt='' src={require("../../Logos/Diets/vegetarian.png")}/>
                             <p style={{fontFamily: 'Akaya Kanadaka, cursive'}} className='text-center'><small>includes a diverse mix of fruits, vegetables, grains, healthy fats and proteins</small></p>
                         </div>
                     </div>

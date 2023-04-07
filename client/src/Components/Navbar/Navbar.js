@@ -19,7 +19,7 @@ function RefreshPage(){
 
 
 function Navbar(props) {
-  const [cookie, setCookie, removeCookie] = useCookies("token");
+  const [removeCookie] = useCookies("token");
   
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);

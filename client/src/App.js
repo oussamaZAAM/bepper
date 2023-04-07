@@ -13,7 +13,6 @@ import Login from "./Components/Login";
 import EmailVerify from "./Components/EmailVerify";
 import ForgotPassword from './Components/ForgotPassword';
 import PasswordReset from "./Components/PasswordReset";
-import Test from './Components/Test/Test';
 import CompleteLogin from './Components/EmailVerify/CompleteLogin';
 import Settings from './Components/Settings/Settings';
 
@@ -21,7 +20,7 @@ import Settings from './Components/Settings/Settings';
 import './App.css';
 
 function App() {
-  const [cookie, setCookie, removeCookie] = useCookies("token");
+  const [cookie] = useCookies("token");
   const token = cookie.token;
 
   return (
@@ -30,7 +29,6 @@ function App() {
       {/* <Navbar2 /> */}
       <Routes>
           <Route path='/' element={<Main />}/>
-          <Route path='/test' element={<Test />}/>
           <Route path='/main' element={<Main />}/>
           <Route path='/diets' element={<Diets />}/>
           <Route path="/settings" element={token ? <Settings /> : <Navigate to='/' />} />

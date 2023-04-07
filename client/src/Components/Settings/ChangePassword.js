@@ -12,7 +12,7 @@ const ChangePassword = (props) => {
     const REACT_APP_BASE_URL = "https://bepper.cyclic.app";
 
     //Fetch User's Token
-    const [cookie, setCookie, removeCookie] = useCookies("token");
+    const [cookie] = useCookies("token");
     const userId = cookie.user;
 
     //Set Valid-Error Message
@@ -43,6 +43,8 @@ const ChangePassword = (props) => {
         case 'verify':
             setVerify({ ...verify, password: event.target.value });
             break;
+        default:
+            void(0);
     }
     };
     
@@ -57,6 +59,8 @@ const ChangePassword = (props) => {
         case 'verify':
             setVerify({...verify, showPassword: !verify.showPassword});
             break;
+        default:
+            void(0);
     }
     };
 

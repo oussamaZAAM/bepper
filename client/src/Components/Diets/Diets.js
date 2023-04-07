@@ -6,7 +6,7 @@ import LinearProgress from "@mui/material/LinearProgress";
 import Box from "@mui/material/Box";
 import Tooltip from "@mui/material/Tooltip";
 import Fade from "@mui/material/Fade";
-import { Button, Skeleton, Typography } from "@mui/material";
+import { Button, Skeleton } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 
 import "./Diets.css";
@@ -64,6 +64,8 @@ const Diets = () => {
       case "snack":
         setIsSnackSaved((prev) => !prev);
         break;
+      default:
+        void(0);
     }
   };
   const SaveMeal = (e) => {
