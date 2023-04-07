@@ -87,7 +87,7 @@ const Diets = () => {
         snack: [100, 200],
       };
       const res = await axios
-        .post("http://127.0.0.1:8000/polls/meal-planner/", mealsPlanning, {
+        .post("bepper-api.up.railway.app/polls/meal-planner/", mealsPlanning, {
           headers: {
             'Content-Type': 'application/json'
           }

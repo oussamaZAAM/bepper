@@ -5,12 +5,14 @@ import axios from "axios";
 import styles from "./styles.module.css";
 
 const PasswordReset = () => {
+	const REACT_APP_BASE_URL = "https://bepper.cyclic.app";
+
 	const [validUrl, setValidUrl] = useState(false);
 	const [password, setPassword] = useState("");
 	const [msg, setMsg] = useState("");
 	const [error, setError] = useState("");
 	const param = useParams();
-	const url = `http://localhost:8080/api/password-reset/${param.id}/${param.token}`;
+	const url = `${REACT_APP_BASE_URL}/${param.id}/${param.token}`;
 
 	useEffect(() => {
 		const verifyUrl = async () => {
