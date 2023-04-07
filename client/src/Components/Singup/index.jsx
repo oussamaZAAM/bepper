@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
 
 const Signup = () => {
-    const { REACT_APP_BASE_URL } = process.env;
+    const REACT_APP_BASE_URL = "https://bepper.cyclic.app";
 	const [data, setData] = useState({
 		firstName: "",
 		lastName: "",

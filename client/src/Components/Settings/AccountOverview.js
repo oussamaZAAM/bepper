@@ -8,7 +8,7 @@ import { Skeleton } from '@mui/material';
 import './Settings.css';
 
 const AccountOverview = () => {
-    const { REACT_APP_BASE_URL } = process.env;
+    const REACT_APP_BASE_URL = "https://bepper.cyclic.app";
 
     const [infos, setInfos] = useState({username: '', email: '', gender: '', birthday: dayjs(''), region: ''});
 

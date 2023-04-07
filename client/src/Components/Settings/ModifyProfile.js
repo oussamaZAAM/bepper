@@ -13,7 +13,7 @@ import countries from './Countries';
 import './Settings.css';
 
 const ModifyProfile = (props) => {
-    const { REACT_APP_BASE_URL } = process.env;
+    const REACT_APP_BASE_URL = "https://bepper.cyclic.app";
 
     const [infos, setInfos] = useState({username: '', email: (props.completing ? 'filler' : ''), gender: '', birthday: dayjs(''), region: ''});
 

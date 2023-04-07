@@ -9,7 +9,7 @@ import './Settings.css'
 import axios from 'axios';
 
 const ChangePassword = (props) => {
-    const { REACT_APP_BASE_URL } = process.env;
+    const REACT_APP_BASE_URL = "https://bepper.cyclic.app";
 
     //Fetch User's Token
     const [cookie, setCookie, removeCookie] = useCookies("token");

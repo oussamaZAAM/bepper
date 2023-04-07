@@ -9,7 +9,7 @@ import success from "../../images/success.png";
 import styles from "./styles.module.css";
 
 const EmailVerify = () => {
-    const { REACT_APP_BASE_URL } = process.env;
+    const REACT_APP_BASE_URL = "https://bepper.cyclic.app";
 	const [validUrl, setValidUrl] = useState(true);
 	const param = useParams();
 

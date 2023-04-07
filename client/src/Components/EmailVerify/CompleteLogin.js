@@ -8,7 +8,7 @@ import styles from "./styles.module.css";
 
 
 const CompleteLogin = () => { 
-    const { REACT_APP_BASE_URL } = process.env;
+    const REACT_APP_BASE_URL = "https://bepper.cyclic.app";
     const [cookie, setCookie, removeCookie] = useCookies("token");
     const userId = cookie.user;
 

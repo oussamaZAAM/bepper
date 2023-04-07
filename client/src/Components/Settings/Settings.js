@@ -25,7 +25,7 @@ const SmallAvatar = styled(Avatar)(({ theme }) => ({
 const Settings = () => {
     const [swapper, setSwapper] = useState('overview');
 
-    const { REACT_APP_BASE_URL } = process.env;
+    const REACT_APP_BASE_URL = "https://bepper.cyclic.app";
     const [cookie, setCookie, removeCookie] = useCookies("token");
     const userId = cookie.user;
 
