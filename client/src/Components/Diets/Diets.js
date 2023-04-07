@@ -13,14 +13,11 @@ import "./Diets.css";
 import ImageEffect from "./ImageEffect";
 
 const Diets = () => {
-  const { REACT_APP_BASE_URL } = process.env;
   const existingCalories = localStorage.getItem("calories");
   var existingBreakfast = JSON.parse(localStorage.getItem("breakfast"));
   var existingLunch = JSON.parse(localStorage.getItem("lunch"));
   var existingDinner = JSON.parse(localStorage.getItem("dinner"));
   var existingSnack = JSON.parse(localStorage.getItem("snack"));
-
-  const [key, setKey] = useState();
 
   const [breakfast, setBreakfast] = useState(
     existingBreakfast && existingBreakfast

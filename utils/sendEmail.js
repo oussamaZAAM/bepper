@@ -6,13 +6,13 @@ dotenv.config();
 
 // These id's and secrets should come from .env file.
 const CLIENT_ID = process.env.CLIENT_ID;
-const CLEINT_SECRET = process.env.CLEINT_SECRET;
+const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI;
 const REFRESH_TOKEN = process.env.REFRESH_TOKEN;
 
 const oAuth2Client = new google.auth.OAuth2(
 	CLIENT_ID,
-	CLEINT_SECRET,
+	CLIENT_SECRET,
 	REDIRECT_URI
   );
   oAuth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
@@ -66,7 +66,7 @@ module.exports = async (email, subject, text) => {
 			type: 'OAuth2',
 			user: 'bepper777@gmail.com',
 			clientId: CLIENT_ID,
-			clientSecret: CLEINT_SECRET,
+			clientSecret: CLIENT_SECRET,
 			refreshToken: REFRESH_TOKEN,
 			accessToken: accessToken,
 		},
