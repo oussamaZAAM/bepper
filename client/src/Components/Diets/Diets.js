@@ -367,7 +367,7 @@ const Diets = () => {
                           </div>
                         )}
                         <h4 className={isSnackSaved ? "blurred" : ""}>
-                          {dinner.name}
+                          {snack.name}
                         </h4>
                         <p className={isSnackSaved ? "blurred" : ""}>
                           Calories: <b>{snack.calories} calories</b>
